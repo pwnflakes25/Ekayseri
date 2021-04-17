@@ -1,0 +1,52 @@
+section {
+    display: grid;
+    grid-template-columns: 1fr 12fr;
+    padding: 2rem auto;
+    height: fit-content;
+
+    .sidebar {
+        grid-column: 1/2;
+        display: flex;
+        max-height: 100%;
+        flex-direction: column;
+        padding: 15px;
+        height: fit-content;
+
+        .navigations {
+            .avatar {
+                cursor: pointer;
+                width: 60px;
+                height: 60px;
+                border-style: solid;
+                border-radius: 50%;
+                content: "";
+                background-color: white;
+                margin: 10px 10px 2rem 10px;
+            }
+
+            a {
+                transition: all 0.8s;
+            }
+
+            mat-icon {
+                cursor: pointer;
+                font-size: 48px;
+                color: white;
+                margin: 2rem 1rem;
+            }
+        }
+    }
+
+    .main-content {
+        grid-column: 2/3;
+        max-height: 80%;
+        
+        .content-box {
+            background: #F4F4FC;
+            max-height: 550px;
+            border-radius: 20px;
+            padding: 2rem;
+            overflow-y: auto;
+        }
+    }
+}

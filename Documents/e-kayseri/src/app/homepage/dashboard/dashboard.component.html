@@ -1,0 +1,41 @@
+<Section>
+    <p class="header">Dashboard</p>
+    <div class="container">
+        <div class="upcoming-events">
+            <p class="subheader">Upcoming Events</p>
+            <div class="cards">
+                <div class="card" *ngFor="let event of events">
+                    <p class="title">{{event.title}}</p>
+                    <p class='date'>{{event.date}}</p>
+                    <p class='description'>{{event.description}}</p>
+                    <div><button class="btn">Join</button></div>
+                    <p class="quota">{{event.joined}}/{{event.quota}} people joined</p>
+                </div>
+            </div>
+        </div>
+        <div class="calendar">
+            <p class="subheader">Calendar</p>
+            <div class="card">
+
+            </div>
+        </div>
+        <div class="news">
+            <p class="subheader">News</p>
+            <div class="card">
+                <div class="news-item" *ngFor="let item of news"> 
+                    <div class="news-item-header">
+                        <p>{{item.title}}</p>
+                        <p>{{item.date}}</p>
+                        <button class="btn">Read More</button>
+                    </div>
+                    <p>{{item.description}}</p>
+                    <div class="divider"></div>
+                </div>
+            </div>
+        </div>
+        <div class="promoted">
+            <p class="subheader">Promoted</p>
+            <div class="card"></div>
+        </div>
+    </div>
+</Section>

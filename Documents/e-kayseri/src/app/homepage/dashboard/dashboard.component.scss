@@ -1,0 +1,90 @@
+@import '../../../library';
+
+.container {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    grid-template-rows: 5fr 5fr;
+    margin-top: 4rem;
+
+    .upcoming-events {
+        display: flex;
+        flex-direction: column;
+        grid-column: 1/2;
+        grid-row: 1/2;
+
+        .cards {
+            display: flex;
+
+            .card {
+                max-width: 10rem;
+                max-height: 20rem;
+                margin: 1rem 2rem 1rem 0px;
+
+                .title {
+                    font-weight: 500;
+                }
+
+                .date {
+                    color: $dark-grey;
+                }
+
+                .description {
+                    color: $dark-grey;
+                }
+
+                .quota {
+                    text-align: center;
+                }
+            }
+        }
+    }
+
+    .calendar {
+        grid-column: 2/3;
+        grid-row: 1/2;
+        display: flex;
+        flex-direction: column;
+        padding-bottom: 1rem;
+
+        .card {
+            height: 90%;
+        }
+    }
+
+    .news {
+        grid-column: 1/2;
+        grid-row: 2/3;
+
+        .card {
+            width: 90%;
+            max-height: 15rem;
+            overflow-y: auto;
+
+            .news-item {
+
+
+                .news-item-header {
+                    margin: 1rem auto;
+                    p {
+                        display: inline;
+                        margin-right: 5rem;
+                    }
+                 }
+
+                 button {
+                     margin-bottom: 1rem;
+                     float: right;
+                 }
+            }
+        }
+    }
+
+    .promoted {
+        grid-column: 2/3;
+        grid-row: 2/3;
+
+        .card {
+            max-height: 15rem;
+        }
+    }
+}
