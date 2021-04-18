@@ -1,0 +1,43 @@
+@import '../../../library';
+
+section {
+   
+    .container {
+        display: flex;
+        width: 100%;
+
+        .side {
+            padding: 2rem;
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            
+            .card {
+                margin: 1rem auto;
+                width: 100%;
+                position: relative;
+
+                #avatar {
+                    content: " ";
+                    border-radius: 50%;
+                    height: 100px;
+                    width: 100px;
+                    position: absolute;
+                    top: 1rem;
+                    right: 1rem;
+                    background: #F4F4FC;
+                    box-shadow:  20px 20px 60px #cfcfd6,
+                                 -20px -20px 60px #ececec;
+                }
+
+                .subheader {
+                    font-weight: 500;
+                }
+
+                .label {
+                    color: $dark-grey;
+                }
+            }
+        }
+    }
+}
