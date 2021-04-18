@@ -1,10 +1,33 @@
 <section>
     <div class="sidebar">
         <div class="navigations">
-            <div class="avatar" [ngStyle]="{'border-color':(selectedTab === 0) ? '#FF7070' : 'transparent'}" (click)='selectedTab = 0'></div>
-            <a [ngStyle]="{'background-color':(selectedTab === 1) ? '#FF7070' : 'transparent'}" (click)='selectedTab = 1'><mat-icon aria-hidden="false" aria-label="Example home icon">home</mat-icon></a>
-            <a [ngStyle]="{'background-color':(selectedTab === 2) ? '#FF7070' : 'transparent'}" (click)='selectedTab = 2'><mat-icon aria-hidden="false" aria-label="Example home icon" >settings</mat-icon></a>
-            <a [ngStyle]="{'background-color':(selectedTab === 3) ? '#FF7070' : 'transparent'}" (click)='selectedTab = 3'><mat-icon aria-hidden="false" aria-label="Example home icon">monetization_on</mat-icon></a>
+            <div class="avatar" [routerLink]="['/profile']" [ngStyle]="{'border-color':(selectedTab === 0) ? '#FF7070' : 'transparent'}" (click)='selectedTab = 0'></div>
+            
+            <a 
+            [routerLink]="['/']"
+            [ngStyle]="{'background-color':(selectedTab === 1) ? '#FF7070' : 'transparent'}"
+            (click)='selectedTab = 1'>
+                <mat-icon aria-hidden="false" aria-label="Example home icon">
+                    home
+                </mat-icon>
+            </a>
+
+            <a
+            [ngStyle]="{'background-color':(selectedTab === 2) ? '#FF7070' : 'transparent'}"
+            (click)='selectedTab = 2'>
+                <mat-icon aria-hidden="false" aria-label="Example home icon" >
+                    settings
+                </mat-icon></a>
+
+            <a 
+            [routerLink]="['/']"
+            [ngStyle]="{'background-color':(selectedTab === 3) ? '#FF7070' : 'transparent'}" 
+            (click)='selectedTab = 3'>
+                <mat-icon aria-hidden="false" aria-label="Example home icon">
+                    monetization_on
+                </mat-icon>
+            </a>
+
         </div>
     </div>
     <div class="main-content">

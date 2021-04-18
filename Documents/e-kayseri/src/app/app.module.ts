@@ -8,6 +8,7 @@ import { AuthPageComponent } from './auth-page/auth-page.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DashboardComponent } from './homepage/dashboard/dashboard.component';
+import { ProfileComponent } from './homepage/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { DashboardComponent } from './homepage/dashboard/dashboard.component';
     AuthPageComponent,
     HomepageComponent,
     DashboardComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,

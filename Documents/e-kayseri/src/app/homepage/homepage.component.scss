@@ -22,6 +22,11 @@ section {
                 content: "";
                 background-color: white;
                 margin: 10px 10px 2rem 10px;
+
+                &:focus, &:active {
+                    outline: none;
+                }
+
             }
 
             a {
