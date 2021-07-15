@@ -1,0 +1,121 @@
+body {
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    height: 100%;
+  }
+  
+  a {
+    color: #00B7FF;
+  }
+  
+  .modal-trigger{
+    margin: 2rem;
+  }
+  
+  .logout{
+    font-weight: bold;
+  }
+  
+  
+  .signup-section {
+    display: grid;
+    grid-template-columns: 10fr 10fr;
+    height: 100%;
+  }
+  
+  .welcome-h1{
+    text-align: center;
+    font-style: bold
+  }
+  
+  
+  
+  .signup-side {
+    padding: 2rem;
+    background-color: #dfe1ee;
+    height: 100%;
+  }
+  
+  .welcome-container{
+    padding: 2rem;
+    background-color: #dfe1ee;
+    height: 100%;
+    text-align: center;
+    margin: 2rem;
+  }
+  
+  
+  .login-section {
+    display: grid;
+    grid-template-columns: 10fr 10fr;
+    height: 100%;
+    background-color: blue;
+  }
+  
+  
+  .side1 {
+    padding: 3rem;
+    grid-column: 1/2;
+    background-color: #dfe1ee;
+      height: 100%;
+  }
+  
+  .side2 {
+    grid-column: 2/3;
+    background-color: #f4f4fc;
+    height: 100%;
+    padding: 3rem;
+  }
+  
+  .budak {
+    display: block;
+    width: 70%;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .logo{
+  
+    font-size: 18px;
+    color: #4f6473;
+    font-weight: bold;
+  }
+  
+  .greetings{
+  
+    font-size: 24px;
+    color: #4f6473;
+    font-weight: bold;
+    margin-bottom:2rem;
+    text-align: left;
+  
+  }
+  .greetings2{
+    text-align: center;
+    font-size: 28px;
+    color: #4f6473;
+    font-weight: bold;
+  
+  }
+  
+  .greetings3{
+    text-align: center;
+    font-size: 16px;
+    color: #a9a8a8;
+    font-weight: bold;
+  }
+  
+  
+  .btn {
+    background-color: #ff7070;
+  }
+  
+  .signup-portal{
+    margin: 2rem;
+    color: #a9a8a8;
+    font-weight: bold;
+  }
+  
+  .signup-portal span {
+    color: #ff7070;
+  }

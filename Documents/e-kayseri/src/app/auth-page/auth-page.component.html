@@ -1,1 +1,45 @@
-<p>auth-page works!</p>
+<section class="login-section">
+  <div class="side1">
+    <p class="logo">E-Kayseri</p>
+    <p class="greetings">Welcome!, join over 50 members around Kayseri! sign up now</p>
+    <img src="https://pbs.twimg.com/media/EFLthgLXkAAtQZt?format=jpg&name=medium" class="budak" alt="">
+  </div>
+
+  <div class="side2">
+    <p class="greetings2">Welcome!</p>
+    <p class="greetings3">Log In</p>
+
+    <div class="container">
+
+      <div class="row">
+        <form action="login" class="col s12" method="POST">
+          <div class="row">
+            <div class="input-field col s12">
+              <input id="username" type="text" class="validate" name="username" required>
+              <label for="username">Username</label>
+              <span class="helper-text" data-error="wrong" data-success="right"></span>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="input-field col s12">
+              <input id="password" type="password" class="validate" name="password" required>
+              <label for="password">Password</label>
+              <span class="helper-text" data-error="Password Must be Longer than 5 and less than 50 characters"
+                data-success="right"></span>
+            </div>
+          </div>
+
+          <!-- onblur="lengthCheckLogin()" onchange="lengthCheckLogin()" onfocus="lengthCheckLogin()" -->
+
+          <button class="waves-effect waves-light btn" type="submit">Login</button>
+        </form>
+      </div>
+
+
+
+      <p class="signup-portal">Dont have an account? <span onClick="redirectSignUp()">Sign up</span> Now!</p>
+    </div>
+  </div>
+
+</section>
