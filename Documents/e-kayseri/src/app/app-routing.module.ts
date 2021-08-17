@@ -4,7 +4,7 @@ import { DashboardComponent } from './homepage/dashboard/dashboard.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { ProfileComponent } from './homepage/profile/profile.component';
 import { AuthPageComponent } from './auth-page/auth-page.component';
-import { SignUpComponent } from './sign-up/sign-up.component';
+import { RegisterProfileProcessComponent } from './auth-page/register-profile-process/register-profile-process.component';
 
 const routes: Routes = [
   {
@@ -26,9 +26,9 @@ const routes: Routes = [
     component: AuthPageComponent,
   },
   {
-    path: 'signup',
-    component: SignUpComponent,
-  },
+    path: 'create-profile/:id',
+    component: RegisterProfileProcessComponent,
+  }
 ];
 
 @NgModule({

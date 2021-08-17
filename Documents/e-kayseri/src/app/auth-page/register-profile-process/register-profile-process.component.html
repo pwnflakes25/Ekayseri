@@ -1,0 +1,92 @@
+<section>
+    <div class="card">
+        <div class="stepper-indicator">
+            <div class="circle-step" [ngStyle]="{'background-color': currentStep === 1 ? '#2F4858' : '#dfe1ee'}">1</div>
+            <div class="circle-step" [ngStyle]="{'background-color': currentStep === 2 ? '#2F4858' : '#dfe1ee'}">2</div>
+            <div class="circle-step" [ngStyle]="{'background-color': currentStep === 3 ? '#2F4858' : '#dfe1ee'}">3</div>
+        </div>
+        <form *ngIf="currentStep === 1">
+            <div class="row">
+                <div class="input-field col s6">
+                    <input type="text" class="validate" name="first_name" required>
+                    <label>First Name</label>
+                    <span class="helper-text" data-error="Field ini wajib di isi"></span>
+                </div>
+                <div class="input-field col s6">
+                    <input type="text" class="validate" name="first_name" required>
+                    <label>Last Name</label>
+                    <span class="helper-text" data-error="Field ini wajib di isi"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s6">
+                    <mat-form-field>
+                        <input matInput (click)="picker.open()" [matDatepicker]="picker">
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                    <label>Choose a date</label>
+                </div>
+                <div class="input-field col s6">
+                    <mat-form-field appearance="fill" class="select-input">
+                        <mat-select>
+                          <mat-option>None</mat-option>
+                          <mat-option value="male">Laki-Laki</mat-option>
+                          <mat-option value="female">Perempuan</mat-option>
+                          <mat-option value="other">Others</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    <label>Jenis Kelamin</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input type="tel" class="validate" name="first_name" required>
+                    <label>Nomer Telp</label>
+                    <span class="helper-text" data-error="Field ini wajib di isi"></span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-field col s12">
+                    <input type="text" class="validate" name="first_name" required>
+                    <label>Address</label>
+                    <span class="helper-text" data-error="Field ini wajib di isi"></span>
+                </div>
+            </div>
+            
+        </form>
+
+        <form *ngIf="currentStep === 2">
+            <div class="row">
+                <div class="input-field col s6">
+                    <input #datePicker type="text" class="datepicker">
+                    <label>Tanggal Masuk ke Turki</label>
+                    <span class="helper-text" data-error="Field ini wajib di isi"></span>
+                </div>
+            </div>
+            <div class="input-field col s6">
+                <input type="text" class="validate" name="first_name" required>
+                <label>Nama Institusi Pendidikan</label>
+                <span class="helper-text" data-error="Field ini wajib di isi"></span>
+            </div>
+            <div class="input-field col s6">
+                <select>
+                    <option value="" disabled selected>Level Pendidikan</option>
+                    <option value="high_school">High School</option>
+                    <option value="undergraduate">Undergraduate</option>
+                    <option value="master">Master</option>
+                    <option value="phd">PhD</option>
+                </select>
+                <label>Gender</label>
+            </div>
+        </form>
+
+        <form *ngIf="currentStep === 3">
+
+        </form>
+
+        <div class='button-container'>
+            <button class="waves-effect waves-light btn" (click)="onNextStep()">Next</button>
+        </div>
+    </div>
+</section>

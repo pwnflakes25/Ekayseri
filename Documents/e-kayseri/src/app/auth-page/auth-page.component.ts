@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from "../shared/auth.service"
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthService } from "../shared/services/auth.service"
 
 @Component({
   selector: 'app-auth-page',
@@ -8,8 +10,37 @@ import { AuthService } from "../shared/auth.service"
 })
 export class AuthPageComponent implements OnInit {
 
-  constructor(public authService: AuthService) { }
+  isNewUser: boolean = false;
+  authForm: FormGroup;
 
-  ngOnInit(){}
+  constructor(public authService: AuthService, private fb: FormBuilder, private router: Router) { }
+
+  ngOnInit(){
+    this.switchForm();
+  }
+
+  toggleAuthForm() {
+    this.isNewUser = !this.isNewUser;
+    this.switchForm();
+  }
+
+  switchForm() {
+    if(this.isNewUser) {
+      this.authForm = this.fb.group({
+        email: [''],
+        password: [''],
+      })
+    } else {
+      this.authForm = this.fb.group({
+        email: [''],
+        username: [''],
+        password: [''],
+      })
+    }
+  }
+
+  onSignup() {
+    this.router.navigate(['/create-profile', '123']);
+  }
 
 }
