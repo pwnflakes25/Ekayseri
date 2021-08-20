@@ -9,11 +9,27 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
+.mat-form-field:not(.select-input) .mat-form-field-underline {
+  display: none;
+}
+
+.mat-form-field-appearance-fill .mat-form-field-underline::before {
+  background-color: $dark-grey !important;
+}
+
+.mat-select-panel {
+  background: #dcdeea !important;
+
+  .mat-option {
+    color: $dark-blue !important;
+  }
+}
+
 .mat-form-field-appearance-legacy .mat-form-field-underline {
   background-color: grey;
 }
 
-.mat-form-field.mat-focused .mat-form-field-ripple{
+.mat-form-field.mat-focused .mat-form-field-ripple {
   background-color: $pink;
 }
 
@@ -64,6 +80,11 @@ body {
     box-shadow: 5px 5px 10px #ee8383, -5px -5px 10px #ffffff;
     outline: none;
   }
+
+  &:disabled {
+    background: $dark-grey;
+    color: white;
+  }
 }
 
 ::-webkit-scrollbar {
@@ -96,6 +117,7 @@ body {
   padding: 0 1rem;
 }
 
-.dropdown-content li> a, .dropdown-content li> span {
-    color: $pink !important;
+.dropdown-content li > a,
+.dropdown-content li > span {
+  color: $pink !important;
 }

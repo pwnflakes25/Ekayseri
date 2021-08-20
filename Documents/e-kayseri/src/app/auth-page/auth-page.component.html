@@ -11,18 +11,18 @@
 
     <div class="welcome-container" id="login" *ngIf="!isNewUser">
       <div class="row">
-        <form action="login" class="col s12">
+        <form [formGroup]="authForm" class="col s12">
           <div class="row">
             <div class="input-field col s12">
-              <input id="username" type="text" class="validate" name="username" required>
-              <label for="username">Email</label>
+              <input formControlName="username" type="text" class="validate" name="email" required>
+              <label for="email">Username</label>
               <span class="helper-text" data-error="wrong"></span>
             </div>
           </div>
 
           <div class="row">
             <div class="input-field col s12">
-              <input id="password" type="password" class="validate" name="password" required>
+              <input formControlName="password" id="password" type="password" class="validate" name="password" required>
               <label for="password">Password</label>
               <span class="helper-text" data-error="Password Must be Longer than 5 and less than 50 characters"></span>
             </div>
@@ -30,7 +30,7 @@
 
           <!-- onblur="lengthCheckLogin()" onchange="lengthCheckLogin()" onfocus="lengthCheckLogin()" -->
 
-          <button class="waves-effect waves-light btn" type="submit">Login</button>
+          <button class="waves-effect waves-light btn" type="submit" (click)="onSignin()">Login</button>
         </form>
       </div>
       <p class="signup-portal">Belum ada akun? <a (click)="toggleAuthForm()">Daftar </a> dulu!</p>
@@ -38,10 +38,10 @@
 
     <div class="welcome-container" id="signup" *ngIf="isNewUser">
       <div class="row">
-        <form action="login" class="col s12">
+        <form [formGroup]="authForm" class="col s12">
           <div class="row">
             <div class="input-field col s12">
-              <input id="email" type="email" class="validate" name="email" required>
+              <input id="email" formControlName="email" type="email" class="validate" name="email" required>
               <label for="email">Email</label>
               <span class="helper-text" data-error="email wajib" ></span>
             </div>
@@ -49,7 +49,7 @@
 
           <div class="row">
             <div class="input-field col s12">
-              <input id="username" type="text" class="validate" name="username" required>
+              <input id="username" formControlName="username" type="text" class="validate" name="username" required>
               <label for="username">Username</label>
               <span class="helper-text" data-error="User name wajib" ></span>
             </div>
@@ -57,7 +57,7 @@
 
           <div class="row">
             <div class="input-field col s12">
-              <input id="password" type="password" class="validate" name="password" required>
+              <input id="password" formControlName="password" type="password" class="validate" name="password" required>
               <label for="password">Password</label>
               <span class="helper-text" data-error="Password Must be Longer than 5 and less than 50 characters"
                 ></span>

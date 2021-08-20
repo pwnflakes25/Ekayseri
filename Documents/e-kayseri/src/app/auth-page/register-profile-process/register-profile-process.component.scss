@@ -1,63 +1,83 @@
-@import '../../../library';
+@import "../../../library";
 
-::ng-deep .mat-form-field:not(.select-input) .mat-form-field-underline {
-    display: none;
+::ng-deep.mat-form-field-ripple {
+  /*change color of underline when focused*/
+  background-color: $pink !important;
 }
 
- ::ng-deep .mat-form-field-appearance-fill .mat-form-field-underline::before {
-    background-color: $dark-grey !important;
+::ng-deep .mat-select-value {
+  color: black;
 }
-  
-  ::ng-deep.mat-form-field-ripple {
-   /*change color of underline when focused*/
-   background-color: $pink !important;;
-  }
 
-  ::ng-deep .mat-select-value {
-      color: black;
-  }
-
-  .mat-select {
-      margin-top: 11.5px;
-  }
+.mat-select {
+  margin-top: 23px;
+}
 
 section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+
+  .register-card {
+    min-width: 40vw;
+  }
+
+  .input-field {
+      margin-top: unset !important;
+      margin-bottom: unset !important;
+  }
+
+  .stepper-indicator {
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
 
-    .stepper-indicator {
-        display: flex;
-        justify-content: center;
-        align-items: center;
+    .circle-step {
+      border-radius: 50%;
+      height: 25px;
+      width: 25px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      margin-right: 4rem;
+      position: relative;
+      transition: all 0.5s;
 
-        .circle-step {
-            border-radius: 50%;
-            height: 25px;
-            width: 25px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            margin-right: 4rem;
-            position: relative;
-
-            &:not(:last-child):after {
-                content: "";
-                position: absolute;
-                height: 1rem;
-                width: 3rem;
-                border-top: 2px solid $dark-grey;
-                right: -50px;
-                top: 50%;
-            }
-        }
+      &:not(:last-child):after {
+        content: "";
+        position: absolute;
+        height: 1rem;
+        width: 3rem;
+        border-top: 2px solid $dark-grey;
+        right: -50px;
+        top: 50%;
+      }
     }
+  }
 
-    .button-container {
-        display: flex;
-        justify-content: flex-end;
-    }
+  .header {
+    color: $dark-blue;
+    font-size: 24px;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    margin-left: 10px;
+  }
+
+  textarea {
+    min-height: 15rem;
+    margin: 0 auto;
+  }
+
+  .mat-form-field {
+    margin: 0;
+    padding: 0;
+  }
+
+  .button-container {
+    display: flex;
+    justify-content: flex-end;
+  }
 }

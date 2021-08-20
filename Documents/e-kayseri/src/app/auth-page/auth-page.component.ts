@@ -29,18 +29,36 @@ export class AuthPageComponent implements OnInit {
       this.authForm = this.fb.group({
         email: [''],
         password: [''],
+        username: [''],
       })
     } else {
       this.authForm = this.fb.group({
-        email: [''],
         username: [''],
         password: [''],
       })
     }
   }
 
-  onSignup() {
-    this.router.navigate(['/create-profile', '123']);
+  async onSignup() {
+    const payload = this.authForm.value;
+    const user = await this.authService.signUp(payload.email, payload.username, payload.password);
+    if(user) {
+      try {
+        await this.authService.signIn(payload.username, payload.password);
+        this.router.navigate(['/create-profile', '123']);
+      } catch (error) {
+        console.log(error);
+        return;
+      }
+    }
+  }
+
+  async onSignin() {
+    const payload = this.authForm.value;
+    const user = await this.authService.signIn(payload.username, payload.password);
+    if(user) {
+      this.router.navigate(['/']);
+    }
   }
 
 }
