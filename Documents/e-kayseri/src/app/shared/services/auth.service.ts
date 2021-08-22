@@ -59,6 +59,10 @@ export class AuthService {
     return await Auth.currentUserInfo();
   }
 
+  async getSession() {
+    return await Auth.currentSession();
+  }
+
 
   async signOut() {
     try {

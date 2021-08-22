@@ -1,59 +1,73 @@
+@import "../../library";
+
 section {
-    display: grid;
-    grid-template-columns: 1fr 12fr;
-    padding: 2rem auto;
+  display: grid;
+  grid-template-columns: 1fr 12fr;
+  padding: 2rem auto;
+  height: fit-content;
+
+  .sidebar {
+    grid-column: 1/2;
+    display: flex;
+    max-height: 100%;
+    flex-direction: column;
+    padding: 15px;
     height: fit-content;
 
-    .sidebar {
-        grid-column: 1/2;
+    .navigations {
+      .avatar {
+        cursor: pointer;
+        width: 60px;
+        height: 60px;
+        border-style: solid;
+        border-radius: 50%;
+        content: "";
+        background-color: white;
+        margin: 10px 10px 2rem 10px;
+
+        &:focus,
+        &:active {
+          outline: none;
+        }
+      }
+
+      a {
+        transition: all 0.2s;
+      }
+
+      mat-icon {
+        cursor: pointer;
+        font-size: 42px;
+        margin: 1rem;
+        width: 4rem;
+        height: 4rem;
         display: flex;
-        max-height: 100%;
         flex-direction: column;
-        padding: 15px;
-        height: fit-content;
+        justify-content: center;
+        align-items: center;
+        border-radius: 10px;
+      }
 
-        .navigations {
-            .avatar {
-                cursor: pointer;
-                width: 60px;
-                height: 60px;
-                border-style: solid;
-                border-radius: 50%;
-                content: "";
-                background-color: white;
-                margin: 10px 10px 2rem 10px;
-
-                &:focus, &:active {
-                    outline: none;
-                }
-
-            }
-
-            a {
-                transition: all 0.8s;
-            }
-
-            mat-icon {
-                cursor: pointer;
-                font-size: 48px;
-                color: white;
-                margin: 2rem 1rem;
-            }
-        }
+      #logout-button {
+        color: rgb(155, 161, 202);
+        bottom: 4rem;
+        position: absolute;
+      }
     }
+  }
 
-    .main-content {
-        grid-column: 2/3;
-        max-height: 80%;
-        
-        .content-box {
-            background: #F4F4FC;
-            max-height: 90vh;
-            border-radius: 20px;
-            padding: 2rem;
-            overflow-y: auto;
-            margin-top: 1rem;
-            margin-right: 1rem;
-        }
+  .main-content {
+    grid-column: 2/3;
+    max-height: 80%;
+
+    .content-box {
+      background: #f4f4fc;
+      max-height: 90vh;
+      border-radius: 20px;
+      padding: 2rem;
+      overflow-y: auto;
+      margin-top: 1rem;
+      margin-right: 1rem;
     }
+  }
 }

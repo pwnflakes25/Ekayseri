@@ -1,0 +1,24 @@
+<section>
+    <p class="header">My Debt</p>
+    <div class="card debt-data">
+        <div>
+            <p><mat-icon>payments</mat-icon> My Current Debt</p>
+            <p class="number">{{totalDebt}} <sub>TL</sub> </p>
+        </div>
+        <div>
+            <p><mat-icon>price_check</mat-icon> Total Debt Paid</p>
+            <p class="number">{{totalPaid}} <sub>TL</sub> </p>
+        </div>
+    </div>
+    <div class="card debt-list-container">
+        <p class="subheader">Debt History</p>
+        <div class="debt-list" *ngFor="let debt of debts">
+            <div class="debt-item">
+                <p>Amount: <span>{{debt.amount}}</span></p>
+                <p>Date Issued: <span>{{debt.dateIssued * 1000 | date}}</span></p>
+                <p>Status: <span>{{debt.status}}</span></p>
+            </div>
+            <div class="divider"></div>
+        </div>
+    </div>
+</section>

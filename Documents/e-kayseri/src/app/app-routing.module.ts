@@ -7,6 +7,7 @@ import { AuthPageComponent } from './auth-page/auth-page.component';
 import { RegisterProfileProcessComponent } from './auth-page/register-profile-process/register-profile-process.component';
 import { AuthGuardService as AuthGuard} from './shared/services/auth-guard.service';
 import { MyDebtComponent } from './homepage/my-debt/my-debt.component';
+import { SpinnerComponent } from './shared/spinner/spinner.component';
 
 const routes: Routes = [
   {
@@ -26,6 +27,13 @@ const routes: Routes = [
         path: 'my-debt',
         component: MyDebtComponent,
       },
+      {
+        path: 'spinner',
+        component: SpinnerComponent,
+      },
+      {
+        path: 'event/:id',
+      }
     ]
   },
   {

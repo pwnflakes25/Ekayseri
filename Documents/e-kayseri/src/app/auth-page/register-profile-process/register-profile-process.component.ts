@@ -1,46 +1,60 @@
-import { AfterViewInit, Component, ElementRef, OnChanges, OnInit, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  OnChanges,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
+import { AuthService } from 'src/app/shared/services/auth.service';
 import { ProfileService } from 'src/app/shared/services/profile.service';
+import { UtilityService } from 'src/app/shared/services/utility.service';
 declare const M: any;
 
 @Component({
   selector: 'app-register-profile-process',
   templateUrl: './register-profile-process.component.html',
-  styleUrls: ['./register-profile-process.component.scss']
+  styleUrls: ['./register-profile-process.component.scss'],
 })
-export class RegisterProfileProcessComponent implements OnInit{
-// @ViewChild('datePicker', {static: true}) elems: ElementRef;
+export class RegisterProfileProcessComponent implements OnInit {
+  // @ViewChild('datePicker', {static: true}) elems: ElementRef;
 
-stepListener$ = new BehaviorSubject<number>(1);
-basicInfoForm: FormGroup;
-educationForm: FormGroup;
-aboutMeForm: FormGroup;
-currentStep: number = 1;
-formState: {isCompleted: boolean, savedForm: Object }[] = [
-  {
-    isCompleted: false,
-    savedForm: null,
-  },
-  {
-    isCompleted: false,
-    savedForm: null,
-  },
-  {
-    isCompleted: false,
-    savedForm: null,
-  },
-]
+  stepListener$ = new BehaviorSubject<number>(1);
+  basicInfoForm: FormGroup;
+  educationForm: FormGroup;
+  aboutMeForm: FormGroup;
+  currentStep: number = 1;
+  formState: { isCompleted: boolean; savedForm: Object }[] = [
+    {
+      isCompleted: false,
+      savedForm: null,
+    },
+    {
+      isCompleted: false,
+      savedForm: null,
+    },
+    {
+      isCompleted: false,
+      savedForm: null,
+    },
+  ];
 
-
-  constructor(private fb: FormBuilder, private profileService: ProfileService, private router: Router) { }
+  constructor(
+    private fb: FormBuilder,
+    private profileService: ProfileService,
+    private router: Router,
+    private authService: AuthService,
+    private utilService: UtilityService
+  ) {}
 
   ngOnInit(): void {
     this.stepListener$.subscribe((step: number) => {
       this.currentStep = step;
       this.initFormBasedOnStep(step);
-    })
+    });
   }
 
   initFormBasedOnStep(step: number) {
@@ -65,7 +79,7 @@ formState: {isCompleted: boolean, savedForm: Object }[] = [
       sex: [null, Validators.required],
       phoneNum: [null, Validators.required],
       address: [null, Validators.required],
-      email: ['test@test.com'],
+      email: [''],
     });
   }
 
@@ -74,16 +88,16 @@ formState: {isCompleted: boolean, savedForm: Object }[] = [
       dateOfArrival: [null, Validators.required],
       educationLevel: [null, Validators.required],
       institution: [null, Validators.required],
-      faculty: [" "],
+      faculty: [' '],
       turkishProvince: [null, Validators.required],
     });
   }
 
   initAboutMeForm() {
     this.aboutMeForm = this.fb.group({
-      about: [" "],
+      about: [' '],
       indonesianProvince: [null, Validators.required],
-    })
+    });
   }
 
   isFormInvalid(): boolean {
@@ -91,17 +105,14 @@ formState: {isCompleted: boolean, savedForm: Object }[] = [
   }
 
   formatDates() {
-    console.log(typeof this.basicInfoForm.get('dateOfBirth'));
-    this.basicInfoForm.patchValue({'dateOfBirth': this.dateToUnix(this.basicInfoForm.get('dateOfBirth').value)});
-    this.educationForm.patchValue({'dateOfArrival': this.dateToUnix(this.educationForm.get('dateOfArrival').value)});
-  }
-
-  //TO DO: place this method in util service
-  dateToUnix(date: Date) {
-    if(!(date instanceof Date)) {
-      return;
-    }
-    return (date.getTime() / 1000).toFixed(0);
+    this.basicInfoForm.patchValue({
+      dateOfBirth: this.utilService.dateToUnix(this.basicInfoForm.get('dateOfBirth').value),
+    });
+    this.educationForm.patchValue({
+      dateOfArrival: this.utilService.dateToUnix(
+        this.educationForm.get('dateOfArrival').value
+      ),
+    });
   }
 
   getFormOfCurrentStep(): FormGroup {
@@ -118,33 +129,38 @@ formState: {isCompleted: boolean, savedForm: Object }[] = [
 
   onNextStep() {
     if (this.currentStep !== 3) {
-      this.profileService.getProfile().subscribe(resp => {
-        console.log(resp);
-      }) 
       this.formState[this.currentStep].isCompleted = true;
-      this.formState[this.currentStep].savedForm = this.getFormOfCurrentStep().value;
-      this.stepListener$.next(this.currentStep += 1);
+      this.formState[this.currentStep].savedForm =
+        this.getFormOfCurrentStep().value;
+      this.stepListener$.next((this.currentStep += 1));
     }
   }
 
   onPreviousStep() {
-    if(this.currentStep !== 1) {
-      this.stepListener$.next(this.currentStep -= 1);
-      this.getFormOfCurrentStep().patchValue(this.formState[this.currentStep].savedForm);
+    if (this.currentStep !== 1) {
+      this.stepListener$.next((this.currentStep -= 1));
+      this.getFormOfCurrentStep().patchValue(
+        this.formState[this.currentStep].savedForm
+      );
       M.updateTextFields();
     }
   }
 
-  onRegister() {
-    this.formatDates();
-    const payload = {...this.basicInfoForm.value, ...this.educationForm.value, ...this.aboutMeForm.value};
-    console.log("payload is:", payload);
-    this.profileService.createProfile(payload).subscribe(resp => {
-      if(resp) {
+  async onRegister() {
+    if (typeof this.basicInfoForm.get('dateOfBirth').value !== 'string') {
+      this.formatDates();
+    }
+    const payload = {
+      ...this.basicInfoForm.value,
+      ...this.educationForm.value,
+      ...this.aboutMeForm.value,
+    };
+    payload.email = (await this.authService.getCurrentUser()).attributes.email;
+    this.profileService.createProfile(payload).subscribe((resp) => {
+      if (resp) {
         console.log(resp);
-        this.router.navigate(['/']); 
+        this.router.navigate(['/']);
       }
-    })
+    });
   }
-
 }
