@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import {MatIconModule} from '@angular/material/icon';
+import { MatIconModule } from '@angular/material/icon';
 import { ReactiveFormsModule } from '@angular/forms';
-import {MatDatepickerModule} from '@angular/material/datepicker';
-import {MatSelectModule} from '@angular/material/select';
-import {MatInputModule} from '@angular/material/input';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatSelectModule } from '@angular/material/select';
+import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -18,14 +19,16 @@ import { DashboardComponent } from './homepage/dashboard/dashboard.component';
 import { ProfileComponent } from './homepage/profile/profile.component';
 
 // Firebase services + enviorment module
-import { AngularFireModule } from "@angular/fire";
-import { AngularFireAuthModule } from "@angular/fire/auth";
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
 import { RegisterProfileProcessComponent } from './auth-page/register-profile-process/register-profile-process.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MyDebtComponent } from './homepage/my-debt/my-debt.component';
-
+import { AuthInterceptorInterceptor } from './shared/interceptor/auth-interceptor.interceptor';
+import { SpinnerComponent } from './shared/spinner/spinner.component';
+import { EventDetailComponent } from './homepage/event-detail/event-detail.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +39,8 @@ import { MyDebtComponent } from './homepage/my-debt/my-debt.component';
     ProfileComponent,
     RegisterProfileProcessComponent,
     MyDebtComponent,
+    SpinnerComponent,
+    EventDetailComponent,
   ],
   imports: [
     BrowserModule,
@@ -52,8 +57,16 @@ import { MyDebtComponent } from './homepage/my-debt/my-debt.component';
     MatInputModule,
     MatFormFieldModule,
     HttpClientModule,
+    MatTooltipModule,
   ],
-  providers: [MatDatepickerModule],
-  bootstrap: [AppComponent]
+  providers: [
+    MatDatepickerModule,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorInterceptor,
+      multi: true,
+    },
+  ],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

@@ -1,0 +1,54 @@
+section {
+    .header {
+        margin-bottom: 2rem;
+    }
+
+    .subheader {
+        margin: 1rem auto 1rem 1rem;
+    }
+
+    .debt-data {
+        display: flex;
+        justify-content: center;
+        flex-direction: row;
+        padding: 2rem;
+        
+        div {
+            display: flex;
+            flex-direction: column;
+            width: 30%;
+            text-align: center;
+
+            .mat-icon {
+                vertical-align: bottom;
+                font-size: 28px;
+                margin-right: 8px;
+            }
+
+            .number {
+                font-size: 64px;
+                margin-top: 1rem;
+    
+                sub {
+                    font-size: 16px;
+                }
+            }
+        }
+    }
+
+    .debt-list-container {
+        max-height: 50vh;
+        overflow: auto;
+
+        .debt-item {
+            display: flex;
+            justify-content: space-evenly;
+    
+            span {
+                font-weight: 500;
+            }
+        }
+    }
+
+    
+}

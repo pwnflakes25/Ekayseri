@@ -30,6 +30,14 @@ section {
                                  -20px -20px 60px #ececec;
                 }
 
+                .info-box {
+                    display: flex;
+                    
+                    div {
+                        margin-right: 4vw;
+                    }
+                }
+
                 .subheader {
                     font-weight: 500;
                 }

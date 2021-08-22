@@ -33,8 +33,6 @@ export class HomepageComponent implements OnInit {
         this.selectedTab = this.routes['/'];
         break;
     }
-
-    console.log(this.authService.getCurrentUserInfo());
   }
 
   async onSignout() {
