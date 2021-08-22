@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from '../shared/services/auth.service';
 
 @Component({
   selector: 'app-homepage',
@@ -10,7 +11,7 @@ export class HomepageComponent implements OnInit {
   selectedTab = 1;
   routes = {'/profile': 0 ,'/': 1, '/settings': 2, '/donation': 3}
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private authService: AuthService) {
     
   }
 
@@ -31,6 +32,16 @@ export class HomepageComponent implements OnInit {
       default:
         this.selectedTab = this.routes['/'];
         break;
+    }
+
+    console.log(this.authService.getCurrentUserInfo());
+  }
+
+  async onSignout() {
+    const resp = await this.authService.signOut();
+    if(resp) {
+      console.log(resp);
+      this.router.navigate(['/auth']);
     }
   }
 

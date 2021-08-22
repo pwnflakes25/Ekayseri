@@ -20,11 +20,18 @@
                 </mat-icon></a>
 
             <a 
-            [routerLink]="['/']"
+            [routerLink]="['/my-debt']"
             [ngStyle]="{'background-color':(selectedTab === 3) ? '#FF7070' : 'transparent'}" 
             (click)='selectedTab = 3'>
                 <mat-icon aria-hidden="false" aria-label="Example home icon">
                     monetization_on
+                </mat-icon>
+            </a>
+            <a 
+            [ngStyle]="{'background-color':(selectedTab === 4) ? '#FF7070' : 'transparent'}" 
+            (click)='onSignout()'>
+                <mat-icon aria-hidden="false" aria-label="Example home icon">
+                    logout
                 </mat-icon>
             </a>
 

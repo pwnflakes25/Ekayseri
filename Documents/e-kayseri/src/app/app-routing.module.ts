@@ -3,11 +3,16 @@ import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './homepage/dashboard/dashboard.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { ProfileComponent } from './homepage/profile/profile.component';
+import { AuthPageComponent } from './auth-page/auth-page.component';
+import { RegisterProfileProcessComponent } from './auth-page/register-profile-process/register-profile-process.component';
+import { AuthGuardService as AuthGuard} from './shared/services/auth-guard.service';
+import { MyDebtComponent } from './homepage/my-debt/my-debt.component';
 
 const routes: Routes = [
   {
     path: '',
     component: HomepageComponent,
+    canActivate: [AuthGuard],
     children: [
       {
         path: '',
@@ -16,8 +21,20 @@ const routes: Routes = [
       {
         path: 'profile',
         component: ProfileComponent,
-      }
+      },
+      {
+        path: 'my-debt',
+        component: MyDebtComponent,
+      },
     ]
+  },
+  {
+    path: 'auth',
+    component: AuthPageComponent,
+  },
+  {
+    path: 'create-profile/:id',
+    component: RegisterProfileProcessComponent,
   }
 ];
 

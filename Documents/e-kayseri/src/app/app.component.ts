@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component } from '@angular/core';
+declare const M: any;
 
 @Component({
   selector: 'app-root',
