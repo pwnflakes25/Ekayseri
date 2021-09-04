@@ -1,1 +1,61 @@
-<p>event-detail works!</p>
+<section>
+    <div class="card back-arrow-container row justify-content-between">
+        <a [routerLink]="['/']">
+            <mat-icon id="navigation-arrow">arrow_back</mat-icon>
+        </a>
+    </div>
+    <app-spinner *ngIf="!(event$ | async)"></app-spinner>
+    <div class="main-content" *ngIf="(event$ | async) as event">
+        <mat-icon id="setting-icon" (click)="onDeleteEvent()" *ngIf="currentUser?.attributes?.sub === event?.author?.id?.S">more_vert</mat-icon>
+        <div class="left-side">
+            <div class="event-detail">
+                <div class="card">
+                    <mat-icon>event</mat-icon>
+                    <div class="main-number">{{event?.date | date: 'dd'}}</div>
+                    <div class="secondary-info">{{event?.date | date: 'MMMM'}}</div>
+                </div>
+                <div class="card">
+                    <mat-icon>schedule</mat-icon>
+                    <div class="main-number">{{event?.eventDuration}}</div>
+                    <div class="secondary-info">Days</div>
+                </div>
+                <div class="card">
+                    <mat-icon>place</mat-icon>
+                    <div class="address">{{event?.eventLocation}}</div>
+                </div>
+            </div>
+            <div class="card event-data">
+                <!-- <div class="banner" [style.background]="imgUrl('https://i.ibb.co/GJ0G9vm/pexels-steve-johnson-1789968.jpg')"></div> -->
+                <p class="event-name">{{event?.eventTitle}}</p>
+                <p class="event-author">By: {{ event?.author?.authorName?.S }}</p>
+                <div class="divider"></div>
+                <div>
+                    <p>{{event?.eventDescription}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="right-side">
+            <div class="card event-join">
+                <div>
+                    <mat-chip-list aria-label="Fish selection">
+                        <mat-chip *ngFor="let tag of event?.tags">#{{tag}}</mat-chip>
+                    </mat-chip-list>
+                </div>
+                <div class="divider"></div>
+                <div class="action-button-container">
+                    <button class="btn" [disabled]="!currentUser || event.hasJoined"
+                        (click)="onJoinEvent()">{{ event.hasJoin ? 'Sudah Join' : 'Join'}}</button>
+                </div>
+            </div>
+            <div class="card member-list">
+                <p class="subheader">Participants</p>
+                <div *ngFor="let participant of event?.participants;">
+                    <div>
+                        <p>{{participant?.userName}}</p>
+                    </div>
+                    <div class="divider" *ngIf="event?.participants.length <= 0"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

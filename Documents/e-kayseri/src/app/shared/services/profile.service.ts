@@ -1,7 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { promise } from 'protractor';
-import { Observable } from 'rxjs';
 import { AuthService } from './auth.service';
 
 @Injectable({
@@ -26,5 +24,10 @@ export class ProfileService {
     const url =
       'https://p7fzv5b9q5.execute-api.eu-central-1.amazonaws.com/dev/ekayseri/single';
       return this.http.get(url, {params: {accessToken: token}});
+  }
+
+  updateProfile(payload) {
+    const url = 'https://p7fzv5b9q5.execute-api.eu-central-1.amazonaws.com/dev/ekayseri';
+    return this.http.put(url, payload);
   }
 }

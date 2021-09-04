@@ -8,6 +8,8 @@ import { RegisterProfileProcessComponent } from './auth-page/register-profile-pr
 import { AuthGuardService as AuthGuard} from './shared/services/auth-guard.service';
 import { MyDebtComponent } from './homepage/my-debt/my-debt.component';
 import { SpinnerComponent } from './shared/spinner/spinner.component';
+import { EventDetailComponent } from './homepage/event-detail/event-detail.component';
+import { AdminPanelComponent } from './homepage/admin-panel/admin-panel.component';
 
 const routes: Routes = [
   {
@@ -28,11 +30,12 @@ const routes: Routes = [
         component: MyDebtComponent,
       },
       {
-        path: 'spinner',
-        component: SpinnerComponent,
+        path: 'event-detail',
+        component: EventDetailComponent,
       },
       {
-        path: 'event/:id',
+        path: 'admin-panel',
+        component: AdminPanelComponent,
       }
     ]
   },

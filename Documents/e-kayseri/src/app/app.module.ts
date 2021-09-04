@@ -8,6 +8,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatChipsModule} from '@angular/material/chips';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -29,6 +30,9 @@ import { MyDebtComponent } from './homepage/my-debt/my-debt.component';
 import { AuthInterceptorInterceptor } from './shared/interceptor/auth-interceptor.interceptor';
 import { SpinnerComponent } from './shared/spinner/spinner.component';
 import { EventDetailComponent } from './homepage/event-detail/event-detail.component';
+import { AddEventDialogComponent } from './homepage/dashboard/add-event-dialog/add-event-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { AdminPanelComponent } from './homepage/admin-panel/admin-panel.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +45,8 @@ import { EventDetailComponent } from './homepage/event-detail/event-detail.compo
     MyDebtComponent,
     SpinnerComponent,
     EventDetailComponent,
+    AddEventDialogComponent,
+    AdminPanelComponent,
   ],
   imports: [
     BrowserModule,
@@ -58,6 +64,8 @@ import { EventDetailComponent } from './homepage/event-detail/event-detail.compo
     MatFormFieldModule,
     HttpClientModule,
     MatTooltipModule,
+    MatChipsModule,
+    MatDialogModule,
   ],
   providers: [
     MatDatepickerModule,

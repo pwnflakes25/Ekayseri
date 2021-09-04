@@ -1,51 +1,99 @@
-@import '../../../library';
+@import "../../../library";
 
 section {
-   
-    .container {
-        display: flex;
-        width: 100%;
+  .container {
+    display: flex;
+    width: 100%;
 
-        .side {
-            padding: 2rem;
-            width: 50%;
+    .side {
+      padding: 2rem;
+      width: 50%;
+      display: flex;
+      flex-direction: column;
+
+      .card {
+        margin: 1rem auto;
+        width: 100%;
+        position: relative;
+
+        .card-content {
+          display: flex;
+          flex-direction: row;
+          padding: 0;
+        }
+
+        .edit-icon {
+          vertical-align: middle;
+          color: $purple-grey;
+          font-size: 18px;
+          cursor: pointer;
+        }
+
+        #avatar {
+          content: " ";
+          border-radius: 50%;
+          height: 150px;
+          width: 150px;
+          position: absolute;
+          top: 1.5rem;
+          right: 3rem;
+          background-position: center !important;
+          background-repeat: no-repeat !important;
+          background-size: cover !important;
+          box-shadow: 20px 20px 60px #cfcfd6, -20px -20px 60px #ececec;
+        }
+
+        form {
+          display: flex;
+          flex-direction: row;
+
+          #about-me-textarea {
+            width: 100%;
+          }
+        }
+
+        .info-box {
+          display: flex;
+          flex-direction: column;
+
+          div {
+            margin-right: 4vw;
+            margin-bottom: 1rem;
+          }
+        }
+
+        .subheader {
+          font-weight: 500;
+        }
+
+        .label {
+          color: $dark-grey;
+        }
+
+        .action-button-container {
+          text-align: right;
+
+          button {
+            margin-right: 10px;
+          }
+        }
+      }
+
+      .my-basic {
+        .mat-icon {
+          vertical-align: bottom;
+          margin-right: 10px;
+        }
+
+        form {
             display: flex;
             flex-direction: column;
-            
-            .card {
-                margin: 1rem auto;
-                width: 100%;
-                position: relative;
 
-                #avatar {
-                    content: " ";
-                    border-radius: 50%;
-                    height: 100px;
-                    width: 100px;
-                    position: absolute;
-                    top: 1rem;
-                    right: 1rem;
-                    background: #F4F4FC;
-                    box-shadow:  20px 20px 60px #cfcfd6,
-                                 -20px -20px 60px #ececec;
-                }
-
-                .info-box {
-                    display: flex;
-                    
-                    div {
-                        margin-right: 4vw;
-                    }
-                }
-
-                .subheader {
-                    font-weight: 500;
-                }
-
-                .label {
-                    color: $dark-grey;
-                }
+            .input-field {
+                max-width: 50%;
             }
         }
+      }
     }
+  }
 }

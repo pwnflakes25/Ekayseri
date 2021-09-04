@@ -1,0 +1,67 @@
+    
+    <h2 *ngIf="!isLoading" mat-dialog-title>Buat Item Acara</h2>
+
+    <mat-dialog-content>
+        <app-spinner *ngIf="isLoading"></app-spinner>
+        <form *ngIf="!isLoading" [formGroup]="eventForm">
+            <div class="row">
+                <div class="input-field col s6" id="datePickerField">
+                    <mat-form-field>
+                        <input matInput placeholder="Tanggal Acara" formControlName="date" (click)="picker.open()" [matDatepicker]="picker">
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                </div>
+                <div class="input-field col s6">
+                    <input type="number" formControlName="eventDuration" class="validate" name="duration" required>
+                    <label class="active">Durasi (hari)</label>
+                    <span class="helper-text" data-error="Field ini wajib di isi"></span>
+                </div>
+            </div>
+    
+            <div class="row">
+                <div class="input-field col s12">
+                    <input type="text" formControlName="eventTitle" class="validate" name="duration" required>
+                    <label class="active">Nama Acara</label>
+                    <span class="helper-text" data-error="Field ini wajib di isi"></span>
+                </div>
+            </div>
+    
+            <div class="row">
+                <div class="input-field col s12">
+                    <textarea formControlName="eventDescription" id="textarea1" class="materialize-textarea"></textarea>
+                    <label class="active" for="textarea1">Deskripsi Acara</label>
+                  </div>
+            </div>
+    
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="material-icons prefix">place</i>
+                    <input type="text" formControlName="eventLocation" class="validate" name="location" required>
+                    <label class="active">Lokasi</label>
+                    <span class="helper-text" data-error="Field ini wajib di isi"></span>
+                </div>
+            </div>
+
+            <div class="row">
+                <mat-form-field class="col s12" appearance="legacy">
+                    <mat-chip-list #chipList aria-label="Tag Acara">
+                      <mat-chip *ngFor="let tag of eventForm?.get('tags')?.value"
+                               removable (removed)="removeTag(tag)">
+                        {{tag}}
+                        <mat-icon matChipRemove>cancel</mat-icon>
+                      </mat-chip>
+                      <input placeholder="Tags (Tekan Enter atau koma untuk menambah Tag)"
+                             [matChipInputFor]="chipList"
+                             [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                              matChipInputAddOnBlur="true"
+                             (matChipInputTokenEnd)="addTag($event)">
+                    </mat-chip-list>
+                  </mat-form-field>
+            </div>
+        </form>
+    </mat-dialog-content>
+
+    <mat-dialog-actions *ngIf="!isLoading">
+        <button class="cancel-btn" mat-dialog-close>Cancel</button>
+        <button class="btn" [disabled]="eventForm.invalid" (click)="onSubmit()">Submit</button>
+      </mat-dialog-actions>

@@ -1,9 +1,7 @@
 <section>
     <div class="card register-card">
         <div class="stepper-indicator">
-            <div class="circle-step" [ngStyle]="{'background-color': currentStep === 1 ? '#2F4858' : '#dfe1ee'}">1</div>
-            <div class="circle-step" [ngStyle]="{'background-color': currentStep === 2 ? '#2F4858' : '#dfe1ee'}">2</div>
-            <div class="circle-step" [ngStyle]="{'background-color': currentStep === 3 ? '#2F4858' : '#dfe1ee'}">3</div>
+            <div class="circle-step" *ngFor="let step of formState; let i = index" [ngStyle]="{'background-color': currentStep === i + 1 ? '#2F4858' : '#dfe1ee'}">{{i + 1}}</div>
         </div>
         <form *ngIf="currentStep === 1" [formGroup]="basicInfoForm">
             <div class="header">
@@ -51,8 +49,8 @@
 
             <div class="row">
                 <div class="input-field col s12">
-                    <input type="text" class="validate" formControlName="address" name="first_name" required>
-                    <label class="active">Address</label>
+                    <input type="text" class="validate" formControlName="turkishAddress" name="first_name" required>
+                    <label class="active">Alamat (Turki)</label>
                     <span class="helper-text" data-error="Field ini wajib di isi"></span>
                 </div>
             </div>
@@ -109,6 +107,16 @@
                     </mat-form-field>
                     <label>Provinsi</label>
                 </div>
+                <div class="input-field col s6">
+                    <mat-form-field appearance="legacy" class="select-input">
+                        <mat-select formControlName="jalur">
+                            <mat-option>None</mat-option>
+                            <mat-option value="mandiri">Mandiri</mat-option>
+                            <mat-option value="ytb">YTB</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <label>Jalur</label>
+                </div>
             </div>
         </form>
 
@@ -131,14 +139,41 @@
             </div>
             <div class="input-field col s12">
                 <textarea formControlName="about" id="textarea1" class="materialize-textarea"></textarea>
-                <label for="textarea1">About Me</label>
+                <label class="active" for="textarea1">About Me</label>
               </div>
         </form>
 
+        <form *ngIf="currentStep === 4" [formGroup]="emergencyContactForm">
+            <div class="header">
+                <p>Emergency Contact Information</p>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input type="text" class="validate" formControlName="guardianName" name="guardianName" required>
+                    <label class="active">Nama Wali</label>
+                    <span class="helper-text" data-error="Field ini wajib di isi"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input type="text" class="validate" formControlName="indonesianAddress" name="indo_address" required>
+                    <label class="active">Alamat (Indonesia)</label>
+                    <span class="helper-text" data-error="Field ini wajib di isi"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input type="tel" class="validate" formControlName="guardianPhoneNumber" name="guardianName" required>
+                    <label class="active">Nomer Telp Wali</label>
+                    <span class="helper-text" data-error="Field ini wajib di isi"></span>
+                </div>
+            </div>
+        </form>
+
         <div class='button-container'>
-            <button *ngIf="currentStep !== 1"  class="waves-effect waves-light btn" (click)="onPreviousStep()">Back</button>
-            <button *ngIf="currentStep !== 3" [disabled]="isFormInvalid()" class="waves-effect waves-light btn" (click)="onNextStep()">Next</button>
-            <button *ngIf="currentStep === 3" class="waves-effect waves-light btn" (click)="onRegister()">Done</button>
+            <a *ngIf="currentStep !== 1" (click)="onPreviousStep()">BACK</a>
+            <button *ngIf="currentStep !== 4" [disabled]="isFormInvalid()" class="waves-effect waves-light btn" (click)="onNextStep()">Next</button>
+            <button *ngIf="currentStep === 4" class="waves-effect waves-light btn" (click)="onRegister()">Done</button>
         </div>
     </div>
 </section>
