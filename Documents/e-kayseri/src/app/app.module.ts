@@ -1,15 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { MatIconModule } from '@angular/material/icon';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatSelectModule } from '@angular/material/select';
-import { MatInputModule } from '@angular/material/input';
-import { MatNativeDateModule } from '@angular/material/core';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import {MatTooltipModule} from '@angular/material/tooltip';
-import {MatChipsModule} from '@angular/material/chips';
-
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -32,7 +24,7 @@ import { SpinnerComponent } from './shared/spinner/spinner.component';
 import { EventDetailComponent } from './homepage/event-detail/event-detail.component';
 import { AddEventDialogComponent } from './homepage/dashboard/add-event-dialog/add-event-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
-import { AdminPanelComponent } from './homepage/admin-panel/admin-panel.component';
+import { SharedModule } from './shared/modules/shared.module';
 
 @NgModule({
   declarations: [
@@ -46,26 +38,16 @@ import { AdminPanelComponent } from './homepage/admin-panel/admin-panel.componen
     SpinnerComponent,
     EventDetailComponent,
     AddEventDialogComponent,
-    AdminPanelComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatIconModule,
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatSelectModule,
-    MatInputModule,
-    MatFormFieldModule,
-    HttpClientModule,
-    MatTooltipModule,
-    MatChipsModule,
-    MatDialogModule,
+    SharedModule,
   ],
   providers: [
     MatDatepickerModule,

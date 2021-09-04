@@ -9,7 +9,6 @@ import { AuthGuardService as AuthGuard} from './shared/services/auth-guard.servi
 import { MyDebtComponent } from './homepage/my-debt/my-debt.component';
 import { SpinnerComponent } from './shared/spinner/spinner.component';
 import { EventDetailComponent } from './homepage/event-detail/event-detail.component';
-import { AdminPanelComponent } from './homepage/admin-panel/admin-panel.component';
 
 const routes: Routes = [
   {
@@ -35,7 +34,7 @@ const routes: Routes = [
       },
       {
         path: 'admin-panel',
-        component: AdminPanelComponent,
+        loadChildren: () => import('./homepage/admin-panel/admin-panel.module').then(m => m.AdminPanelModule),
       }
     ]
   },
@@ -46,7 +45,7 @@ const routes: Routes = [
   {
     path: 'create-profile/:id',
     component: RegisterProfileProcessComponent,
-  }
+  },
 ];
 
 @NgModule({

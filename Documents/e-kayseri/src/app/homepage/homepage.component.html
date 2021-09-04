@@ -25,14 +25,14 @@
                     monetization_on
                 </mat-icon>
             </a>
-            <a [routerLink]="['/my-debt']" (click)='selectedTab = 4'>
-                <mat-icon id="logout-button" matTooltip="Keluar" matTooltipPosition="right" [ngStyle]="{'color':(selectedTab === 4) ? '#FF7070' : '#9ba1ca'}" aria-hidden="false"
-                    aria-label="Example home icon">
-                    logout
+            <a [routerLink]="['/admin-panel']" (click)='selectedTab = 4'>
+                <mat-icon id="admin" matTooltip="Panel Admin" matTooltipPosition="right" [ngStyle]="{'color':(selectedTab === 4) ? '#FF7070' : '#9ba1ca'}" aria-hidden="false"
+                    aria-label="Admin Panel">
+                    admin_panel_settings
                 </mat-icon>
             </a>
             <a (click)='onSignout()'>
-                <mat-icon id="logout-button" matTooltip="Keluar" matTooltipPosition="right" [ngStyle]="{'color':(selectedTab === 4) ? '#FF7070' : '#9ba1ca'}" aria-hidden="false"
+                <mat-icon id="logout-button" matTooltip="Keluar" matTooltipPosition="right" [ngStyle]="{'color':(selectedTab === 5) ? '#FF7070' : '#9ba1ca'}" aria-hidden="false"
                     aria-label="Example home icon">
                     logout
                 </mat-icon>

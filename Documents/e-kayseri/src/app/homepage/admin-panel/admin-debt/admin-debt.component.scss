@@ -1,0 +1,30 @@
+@import '../../../../library';
+
+.card {
+    max-height: 15rem;
+    overflow-y: auto;
+}
+
+.mat-table {
+    color: $dark-blue;
+    background: transparent;
+
+    th.mat-header-cell {
+        font-weight: 500 !important;
+        font-size: 18px;
+        border-bottom: 2px solid;
+    }
+}
+
+::ng-deep .mat-checkbox-checked .mat-checkbox-background,
+::ng-deep .mat-checkbox-indeterminate .mat-checkbox-background {
+    background-color: white !important;
+}
+::ng-deep .mat-checkbox .mat-checkbox-frame{
+    border: 0px !important;
+ }
+
+ ::ng-deep .mat-checkbox .mat-checkbox-ripple {
+    left: calc(100% - 15px) !important;
+    top: calc(100% - 20px) !important;
+}
