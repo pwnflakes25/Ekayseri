@@ -1,90 +1,133 @@
-@import '../../../library';
+@import "../../../library";
 
 .container-box {
-    display: grid;
-    grid-template-columns: 3fr 1fr;
-    grid-template-rows: 5fr 5fr;
-    margin-top: 4rem;
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  grid-template-rows: 5fr 5fr;
+  margin-top: 4rem;
 
-    .upcoming-events {
-        display: flex;
-        flex-direction: column;
-        grid-column: 1/2;
-        grid-row: 1/2;
+  .subheader {
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    margin-bottom: 2vh;
 
-        .cards {
-            display: flex;
+    .add-button {
+      height: 25px;
+      width: 25px;
+      border-radius: 50px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0;
+      margin: 0 0 0 14px;
+      background: linear-gradient(145deg, #ffffff, #dadada);
+      box-shadow: 9px 9px 18px #919191, -9px -9px 18px #ffffff;
+      cursor: pointer;
 
-            .card {
-                max-width: 10rem;
-                max-height: 20rem;
-                margin: 1rem 2rem 1rem 0px;
+      .mat-icon {
+        color: $pink;
+      }
 
-                .title {
-                    font-weight: 500;
-                }
-
-                .date {
-                    color: $dark-grey;
-                }
-
-                .description {
-                    color: $dark-grey;
-                }
-
-                .quota {
-                    text-align: center;
-                }
-            }
-        }
+      &:active {
+        background: linear-gradient(145deg, #ffffff, #dadada);
+        box-shadow:  9px 9px 18px #d0d0d0,
+                     -9px -9px 18px #ffffff;
+      }
     }
+  }
 
-    .calendar {
-        grid-column: 2/3;
-        grid-row: 1/2;
-        display: flex;
-        flex-direction: column;
-        padding-bottom: 1rem;
+  .upcoming-events {
+    display: flex;
+    flex-direction: column;
+    grid-column: 1/2;
+    grid-row: 1/2;
 
-        .card {
-            height: 90%;
+    .cards {
+      display: flex;
+
+      .card {
+        max-width: 11.5rem;
+        max-height: 20rem;
+        margin: 1rem 2rem 1rem 0px;
+
+        .title {
+          font-weight: 500;
         }
-    }
 
-    .news {
-        grid-column: 1/2;
-        grid-row: 2/3;
-
-        .card {
-            width: 90%;
-            max-height: 15rem;
-            overflow-y: auto;
-
-            .news-item {
-
-
-                .news-item-header {
-                    margin: 1rem auto;
-                    p {
-                        display: inline;
-                        margin-right: 5rem;
-                    }
-                 }
-
-                 button {
-                     margin-bottom: 1rem;
-                     float: right;
-                 }
-            }
+        .view-event {
+          color: $purple-grey;
+          vertical-align: bottom;
+          float: right;
+          cursor: pointer;
         }
-    }
 
-    .promoted {
-        grid-column: 2/3;
-        grid-row: 2/3;
-
-        .card {
-            max-height: 15rem;
+        .date {
+          color: $dark-grey;
         }
+
+        .description {
+          color: $dark-grey;
+          display: -webkit-box;
+          max-width: 200px;
+          -webkit-line-clamp: 3;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+          min-height: 4rem;
+        }
+
+        .quota {
+          text-align: center;
+        }
+      }
     }
+  }
+
+  .calendar {
+    grid-column: 2/3;
+    grid-row: 1/2;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 1rem;
+
+    .card {
+      height: 90%;
+    }
+  }
+
+  .news {
+    grid-column: 1/2;
+    grid-row: 2/3;
+    margin-top: 2vh;
+
+    .card {
+      width: 90%;
+      max-height: 15rem;
+      overflow-y: auto;
+
+      .news-item {
+        .news-item-header {
+          margin: 1rem auto;
+          p {
+            display: inline;
+            margin-right: 5rem;
+          }
+        }
+
+        button {
+          margin-bottom: 1rem;
+          float: right;
+        }
+      }
+    }
+  }
+
+  .promoted {
+    grid-column: 2/3;
+    grid-row: 2/3;
+
+    .card {
+      max-height: 15rem;
+    }
+  }
 }

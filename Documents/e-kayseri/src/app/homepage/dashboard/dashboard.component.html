@@ -2,14 +2,15 @@
     <p class="header">Dashboard</p>
     <div class="container-box">
         <div class="upcoming-events">
-            <p class="subheader">Upcoming Events</p>
-            <div class="cards">
-                <div class="card" *ngFor="let event of events">
-                    <p class="title">{{event.title}}</p>
-                    <p class='date'>{{event.date}}</p>
-                    <p class='description'>{{event.description}}</p>
-                    <div><button class="btn">Join</button></div>
-                    <p class="quota">{{event.joined}}/{{event.quota}} people joined</p>
+            <p class="subheader">Upcoming Events <span class="add-button" (click)="addEvent()"><mat-icon>add</mat-icon></span></p>
+            <app-spinner *ngIf="!(events$ | async)"></app-spinner>
+            <div class="cards" *ngIf="(events$ | async)">
+                <div class="card" *ngFor="let event of events$ | async">
+                    <p class="title">{{event?.eventTitle}}</p>
+                    <p class='date'>{{event?.date * 1000 | date}}</p>
+                    <p class='description'>{{event.eventDescription}}</p>
+                    <div><button [routerLink]="['/event-detail']" [queryParams]="{eventId: event?.eventId, date: event?.date}" class="btn">Detil</button></div>
+                    <p class="quota">{{event?.participants?.length}} people joined</p>
                 </div>
             </div>
         </div>

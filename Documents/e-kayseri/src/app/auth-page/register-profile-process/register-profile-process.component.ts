@@ -26,6 +26,7 @@ export class RegisterProfileProcessComponent implements OnInit {
   basicInfoForm: FormGroup;
   educationForm: FormGroup;
   aboutMeForm: FormGroup;
+  emergencyContactForm: FormGroup;
   currentStep: number = 1;
   formState: { isCompleted: boolean; savedForm: Object }[] = [
     {
@@ -40,6 +41,10 @@ export class RegisterProfileProcessComponent implements OnInit {
       isCompleted: false,
       savedForm: null,
     },
+    {
+      isCompleted: false,
+      savedForm: null,
+    }
   ];
 
   constructor(
@@ -68,6 +73,9 @@ export class RegisterProfileProcessComponent implements OnInit {
       case 3:
         this.initAboutMeForm();
         break;
+      case 4:
+        this.initEmergencyContactForm();
+        break;
     }
   }
 
@@ -78,7 +86,7 @@ export class RegisterProfileProcessComponent implements OnInit {
       dateOfBirth: [null, Validators.required],
       sex: [null, Validators.required],
       phoneNum: [null, Validators.required],
-      address: [null, Validators.required],
+      turkishAddress: [null, Validators.required],
       email: [''],
     });
   }
@@ -90,6 +98,7 @@ export class RegisterProfileProcessComponent implements OnInit {
       institution: [null, Validators.required],
       faculty: [' '],
       turkishProvince: [null, Validators.required],
+      jalur: ['mandiri'],
     });
   }
 
@@ -100,13 +109,23 @@ export class RegisterProfileProcessComponent implements OnInit {
     });
   }
 
+  initEmergencyContactForm() {
+    this.emergencyContactForm = this.fb.group({
+      indonesianAddress: [null],
+      guardianPhoneNumber: [null],
+      guardianName: [null],
+    });
+  }
+
   isFormInvalid(): boolean {
     return this.getFormOfCurrentStep().invalid;
   }
 
   formatDates() {
     this.basicInfoForm.patchValue({
-      dateOfBirth: this.utilService.dateToUnix(this.basicInfoForm.get('dateOfBirth').value),
+      dateOfBirth: this.utilService.dateToUnix(
+        this.basicInfoForm.get('dateOfBirth').value
+      ),
     });
     this.educationForm.patchValue({
       dateOfArrival: this.utilService.dateToUnix(
@@ -124,26 +143,42 @@ export class RegisterProfileProcessComponent implements OnInit {
         return this.educationForm;
       case 3:
         return this.aboutMeForm;
+      case 4:
+        return this.emergencyContactForm;
     }
   }
 
   onNextStep() {
-    if (this.currentStep !== 3) {
-      this.formState[this.currentStep].isCompleted = true;
-      this.formState[this.currentStep].savedForm =
-        this.getFormOfCurrentStep().value;
+    if (this.currentStep <= this.formState.length) {
+      this.formState[this.currentStep - 1].isCompleted = true; //make existing step to completed = true in formState
+      this.formState[this.currentStep - 1].savedForm =
+        this.getFormOfCurrentStep().value;  //save the existing form data to the formState object 
       this.stepListener$.next((this.currentStep += 1));
+      //if previously there is already saved data, patch it again in case of return to this step by clicking next
+      if (this.formState[this.currentStep - 1].savedForm) { 
+        this.patchCurrentFormWithSavedData();
+      }
     }
   }
 
   onPreviousStep() {
     if (this.currentStep !== 1) {
+      //if form valid then save data so user can go back and then return and have the form data saved
+      if(!this.isFormInvalid()) {
+        this.formState[this.currentStep - 1].isCompleted = false;
+        this.formState[this.currentStep - 1].savedForm = this.getFormOfCurrentStep().value;
+        this.patchCurrentFormWithSavedData();
+      }
       this.stepListener$.next((this.currentStep -= 1));
-      this.getFormOfCurrentStep().patchValue(
-        this.formState[this.currentStep].savedForm
-      );
+      this.patchCurrentFormWithSavedData(); //patch previous step form so user can see their previous step changes
       M.updateTextFields();
     }
+  }
+
+  patchCurrentFormWithSavedData() {
+    this.getFormOfCurrentStep().patchValue(
+      this.formState[this.currentStep - 1].savedForm
+    );
   }
 
   async onRegister() {
@@ -154,6 +189,7 @@ export class RegisterProfileProcessComponent implements OnInit {
       ...this.basicInfoForm.value,
       ...this.educationForm.value,
       ...this.aboutMeForm.value,
+      ...this.emergencyContactForm.value,
     };
     payload.email = (await this.authService.getCurrentUser()).attributes.email;
     this.profileService.createProfile(payload).subscribe((resp) => {

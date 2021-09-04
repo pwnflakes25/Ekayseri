@@ -4,43 +4,158 @@
     <div class="container" *ngIf="(userProfile | async) as user">
         <div class='side'>
             <div class="card my-basic">
-                <div id="avatar"></div>
-                <p class="subheader">{{user[0]?.firstName}} {{user[0]?.lastName}}</p>
-                <p>{{user[0]?.email}}</p>
-                <p>{{user[0]?.phoneNum}}</p>
+                <div id="avatar" [style.background]="user[0]?.profileImg ? 'url('+user[0].profileImg+')' : imgUrl('https://www.personality-insights.com/wp-content/uploads/2017/12/default-profile-pic-e1513291410505.jpg')"></div>
+                <div>
+                    <p class="subheader">{{user[0]?.firstName}} {{user[0]?.lastName}} <span *ngIf="!isEditMode?.basic">
+                        <mat-icon class="edit-icon" (click)="onEdit(user, 'basic')">edit</mat-icon>
+                    </span></p>
+                    <p>@{{currentUserName}}</p>
+                </div>
+                <div [ngSwitch]="isEditMode.basic">
+                    <ng-container *ngSwitchCase="false">
+                        <p><mat-icon>email</mat-icon> {{user[0]?.email}}</p>
+                        <p><mat-icon>smartphone</mat-icon> {{user[0]?.phoneNum}}</p>
+                        <p><mat-icon>home</mat-icon> {{user[0]?.turkishAddress}}</p>
+                    </ng-container>
+                    <ng-container *ngSwitchCase="true">
+                        <form [formGroup]="editForm">
+                            <div class="input-field">
+                                <input disabled placeholder="{{user[0]?.email}}" id="email" type="email">
+                                <label class="active" for="email">Email</label>
+                            </div>
+                            <div class="input-field">
+                                <input formControlName="phoneNum" id="phone" type="tel" class="validate">
+                                <label class="active" for="phone">Nomer Telefon</label>
+                            </div>
+                            <div class="input-field">
+                                <input formControlName="address" id="address" type="text" class="validate">
+                                <label class="active" for="address">Address</label>
+                            </div>
+                        </form>
+                        <div class="action-button-container">
+                            <button class="cancel-btn" (click)="isEditMode.basic = false">Cancel</button>
+                            <button (click)="onSaveEdit()" class="btn">Save</button>
+                        </div>
+                    </ng-container>
+                </div>
+                
             </div>
             <div class="card my-about">
-                <p class="subheader">About Me</p>
-                <p>{{user[0]?.about}}</p>
+                <p class="subheader">About Me <span *ngIf="!isEditMode?.about">
+                        <mat-icon class="edit-icon" (click)="onEdit(user, 'about')">edit</mat-icon>
+                    </span></p>
+                <div [ngSwitch]="isEditMode?.about">
+                    <div *ngSwitchCase="false">
+                        <p>{{user[0]?.about}}</p>
+                    </div>
+                    <div *ngSwitchCase="true">
+                        <form [formGroup]="editForm">
+                            <div class="input-field" id="about-me-textarea">
+                                <textarea formControlName="about" class="materialize-textarea"></textarea>
+                                <label class="active">About Me</label>
+                            </div>
+                        </form>
+                        <div class="action-button-container">
+                            <button class="cancel-btn" (click)="isEditMode.about = false">Cancel</button>
+                            <button (click)="onSaveEdit()" class="btn">Save</button>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
-       <div class="side">
-        <div class="card my-education">
-            <p class="subheader">Education</p>
-            <p class="label">Institusi:</p>
-            <p>{{user[0]?.institution}}</p>
-            <p class="label">Bolum:</p>
-            <p>{{user[0]?.faculty}}</p>
-            <p class="label">Year:</p>
-            <p>{{user[0]?.educationLevel}}</p>
-        </div>
-        <div class="card my-background">
-            <p class="subheader">Background</p>
-            <div class="info-box">
-                <div>
-                    <p class="label">Kota Asal:</p>
-                    <p>{{user[0]?.indonesianProvince}}</p>
+        <div class="side">
+            <div class="card my-education">
+                <p class="subheader">Education <span *ngIf="!isEditMode?.education">
+                        <mat-icon class="edit-icon" (click)="onEdit(user, 'education')">edit</mat-icon>
+                    </span></p>
+                <div class="card-content" [ngSwitch]="isEditMode?.education">
+                    <ng-container *ngSwitchCase="false">
+                        <div class="info-box">
+                            <div>
+                                <p class="label">Institusi:</p>
+                                <p>{{user[0]?.institution}}</p>
+                            </div>
+                            <div>
+                                <p class="label">Bolum:</p>
+                                <p>{{user[0]?.faculty}}</p>
+                            </div>
+                        </div>
+                        <div class="info-box">
+                            <div>
+                                <p class="label">Provinsi (Turki):</p>
+                                <p>{{user[0]?.turkishProvince}}</p>
+                            </div>
+                            <div>
+                                <p class="label">Level Pendidikan:</p>
+                                <p>{{user[0]?.educationLevel}}</p>
+                            </div>
+                        </div>
+                    </ng-container>
+                    <ng-container *ngSwitchCase="true">
+                        <form [formGroup]="editForm">
+                            <div class="info-box">
+                                <div class="input-field">
+                                    <input formControlName="institution" id="institution" type="text" class="validate">
+                                    <label class="active" for="institution">Institusi</label>
+                                </div>
+                                <div class="input-field">
+                                    <input formControlName="faculty" id="faculty" type="text" class="validate">
+                                    <label class="active" for="faculty">Fakultas</label>
+                                </div>
+                            </div>
+                            <div class="info-box">
+                                <div class="input-field">
+                                    <mat-form-field appearance="legacy" class="select-input">
+                                        <mat-select formControlName="turkishProvince">
+                                            <mat-option>None</mat-option>
+                                            <mat-option value="kayseri">Kayseri</mat-option>
+                                            <mat-option value="sivas">Kayseri 2</mat-option>
+                                            <mat-option value="Gaziantep">Kayseri 3</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                    <label class="active">Provinsi (Turki)</label>
+                                </div>
+                                <div class="input-field">
+                                    <mat-form-field appearance="legacy" class="select-input">
+                                        <mat-select formControlName="educationLevel">
+                                            <mat-option>None</mat-option>
+                                            <mat-option value="high_school">High School</mat-option>
+                                            <mat-option value="undergraduate">Undergraduate</mat-option>
+                                            <mat-option value="master">Master</mat-option>
+                                            <mat-option value="phd">PhD</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                    <label class="active">Level Pendidikan</label>
+                                </div>
+                            </div>
+                        </form>
+                    </ng-container>
                 </div>
-                <div>
-                    <p class="label">Tanggal Lahir:</p>
-                    <p>{{user[0]?.dateOfBirth * 1000 | date}}</p>
+                <div class="action-button-container" *ngIf="isEditMode?.education">
+                    <button class="cancel-btn" (click)="isEditMode.education = false">Cancel</button>
+                    <button class="btn" (click)="onSaveEdit()">Save</button>
                 </div>
             </div>
-            
-            
-            <p class="label">Tahun Masuk:</p>
-            <p>{{user[0]?.dateOfArrival * 1000 | date}}</p>
+            <div class="card my-background">
+                <p class="subheader">Background</p>
+                <div class="card-content">
+                    <div class="info-box">
+                        <div>
+                            <p class="label">Kota Asal:</p>
+                            <p>{{user[0]?.indonesianProvince}}</p>
+                        </div>
+                        <div>
+                            <p class="label">Tanggal Lahir:</p>
+                            <p>{{user[0]?.dateOfBirth * 1000 | date}}</p>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="label">Tahun Masuk:</p>
+                        <p>{{user[0]?.dateOfArrival * 1000 | date}}</p>
+                    </div>
+                </div>
+            </div>
         </div>
-       </div>
     </div>
 </Section>
