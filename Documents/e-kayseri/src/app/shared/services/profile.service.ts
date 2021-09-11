@@ -14,10 +14,16 @@ export class ProfileService {
     return this.http.post(url, payload);
   }
 
-  getProfiles() {
+  getProfiles(token: string) {
     const url =
       'https://p7fzv5b9q5.execute-api.eu-central-1.amazonaws.com/dev/ekayseri/all';
-    return this.http.get(url, { observe: 'response' });
+    return this.http.get(url, {params: {accessToken: token}});
+  }
+
+  getKayseriUserProfiles(token: string) {
+    const url =
+    'https://p7fzv5b9q5.execute-api.eu-central-1.amazonaws.com/dev/ekayseri/filtered';
+    return this.http.get(url,  {params: {accessToken: token}});
   }
 
   getProfile(token: string) {

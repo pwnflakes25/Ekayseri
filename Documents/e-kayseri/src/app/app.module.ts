@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { ReactiveFormsModule } from '@angular/forms';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -17,10 +16,9 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
 import { RegisterProfileProcessComponent } from './auth-page/register-profile-process/register-profile-process.component';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MyDebtComponent } from './homepage/my-debt/my-debt.component';
 import { AuthInterceptorInterceptor } from './shared/interceptor/auth-interceptor.interceptor';
-import { SpinnerComponent } from './shared/spinner/spinner.component';
 import { EventDetailComponent } from './homepage/event-detail/event-detail.component';
 import { AddEventDialogComponent } from './homepage/dashboard/add-event-dialog/add-event-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -35,7 +33,6 @@ import { SharedModule } from './shared/modules/shared.module';
     ProfileComponent,
     RegisterProfileProcessComponent,
     MyDebtComponent,
-    SpinnerComponent,
     EventDetailComponent,
     AddEventDialogComponent,
   ],
@@ -43,7 +40,6 @@ import { SharedModule } from './shared/modules/shared.module';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,

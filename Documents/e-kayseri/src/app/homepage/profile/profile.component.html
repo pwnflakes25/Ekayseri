@@ -28,7 +28,7 @@
                                 <label class="active" for="phone">Nomer Telefon</label>
                             </div>
                             <div class="input-field">
-                                <input formControlName="address" id="address" type="text" class="validate">
+                                <input formControlName="turkishAddress" id="address" type="text" class="validate">
                                 <label class="active" for="address">Address</label>
                             </div>
                         </form>
@@ -147,12 +147,12 @@
                         </div>
                         <div>
                             <p class="label">Tanggal Lahir:</p>
-                            <p>{{user[0]?.dateOfBirth * 1000 | date}}</p>
+                            <p>{{user[0]?.dateOfBirth | date}}</p>
                         </div>
                     </div>
                     <div>
                         <p class="label">Tahun Masuk:</p>
-                        <p>{{user[0]?.dateOfArrival * 1000 | date}}</p>
+                        <p>{{user[0]?.dateOfArrival | date}}</p>
                     </div>
                 </div>
             </div>

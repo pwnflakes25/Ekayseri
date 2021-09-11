@@ -1,3 +1,5 @@
+@import '../../../library';
+
 section {
     .header {
         margin-bottom: 2rem;
@@ -25,9 +27,17 @@ section {
                 margin-right: 8px;
             }
 
+            .number-label {
+                font-weight: bold;
+                font-size: 18px;
+                margin-bottom: 2rem;
+                color: $pink;
+            }
+
             .number {
                 font-size: 64px;
                 margin-top: 1rem;
+                margin-left: 3rem;
     
                 sub {
                     font-size: 16px;
@@ -39,6 +49,10 @@ section {
     .debt-list-container {
         max-height: 50vh;
         overflow: auto;
+
+        .subheader {
+            font-weight: bold;
+        }
 
         .debt-item {
             display: flex;

@@ -39,7 +39,7 @@ export class AddEventDialogComponent implements OnInit {
       authorName: [''],
       eventLocation: ['', Validators.required],
       date: ['', Validators.required],
-      tags: [[]],
+      tags: [['PPI']],
     });
   }
 
@@ -67,7 +67,7 @@ export class AddEventDialogComponent implements OnInit {
 
   async formatPayload() {
     this.isLoading = true;
-    this.eventForm.patchValue({ date: this.utilService.dateToUnix(this.eventForm.get('date').value)});
+    this.eventForm.patchValue({ date: this.utilService.dateToISO(this.eventForm.get('date').value)});
     try {
       const token = (await this.authService.getSession())
         .getAccessToken()

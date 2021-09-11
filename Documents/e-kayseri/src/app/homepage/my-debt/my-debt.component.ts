@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { AuthService } from 'src/app/shared/services/auth.service';
+import { DebtService } from 'src/app/shared/services/debt.service';
 
 @Component({
   selector: 'app-my-debt',
@@ -8,31 +11,17 @@ import { Component, OnInit } from '@angular/core';
 export class MyDebtComponent implements OnInit {
   totalDebt: number = 15;
   totalPaid: number = 50;
-  debts = [
-    {
-      amount: 7,
-      dateIssued: '1629458795',
-      status: 'Unpaid'
-    },
-    {
-      amount: 7,
-      dateIssued: '1629372395',
-      status: 'Paid'
-    },
-    {
-      amount: 7,
-      dateIssued: '1629458795',
-      status: 'Paid'
-    },
-    {
-      amount: 7,
-      dateIssued: '1629285995',
-      status: 'Paid'
-    }
-  ]
-  constructor() { }
+  userDebt$: Observable<any>;
+  debts = []
+  constructor(private authService: AuthService, private debtService: DebtService) { }
 
   ngOnInit(): void {
+    this.fetchUserDebt()
+  }
+
+  async fetchUserDebt() {
+    const currUserId = (await this.authService.getCurrentUserInfo()).attributes.sub;
+    this.userDebt$ = this.debtService.getDebtOfUser(currUserId);
   }
 
 }

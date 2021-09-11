@@ -1,24 +1,68 @@
 @import '../../../../library';
 
 .card {
-    max-height: 15rem;
+    max-height: 25rem;
     overflow-y: auto;
+
+    .action-btn {
+        font-size: 0.7em;
+        margin: 0;
+        display: flex;
+        width: fit-content;
+        align-items: center;
+    }
+
+    .subheader {
+        font-weight: bold;
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 0;
+    }
+
+    .mat-paginator {
+        background-color: transparent;
+        margin-top: 1rem;
+    }
+
+    .setting-header {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+
+        .user-search-field {
+            margin: 0;
+            padding: 0;
+
+            i {
+                top: 1.5rem;
+                width: 1rem;
+                font-size: 1.5rem;
+            }
+
+            input {
+                margin-left: 2rem !important;
+            }
+        }
+    }
 }
 
 .mat-table {
-    color: $dark-blue;
+    color: $purple-grey !important;
     background: transparent;
 
     th.mat-header-cell {
         font-weight: 500 !important;
         font-size: 18px;
         border-bottom: 2px solid;
+        z-index: 100 !important;
+        background-color: $secondary-background !important;
+        top: -20px !important;
     }
 }
 
 ::ng-deep .mat-checkbox-checked .mat-checkbox-background,
 ::ng-deep .mat-checkbox-indeterminate .mat-checkbox-background {
-    background-color: white !important;
+    background-color: $secondary-background !important;
 }
 ::ng-deep .mat-checkbox .mat-checkbox-frame{
     border: 0px !important;

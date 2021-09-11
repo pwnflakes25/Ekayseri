@@ -42,7 +42,7 @@ export class DashboardComponent implements OnInit {
   }
 
   fetchEvents() {
-    this.events$ = this.eventService.getEvents().pipe(map(resp => resp[0]));
+    this.events$ = this.eventService.getEvents().pipe(map((resp: any) => resp.events));
   }
 
   addEvent() {

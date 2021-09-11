@@ -10,11 +10,15 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { HttpClientModule } from '@angular/common/http';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatChipsModule } from '@angular/material/chips';
+import { ReactiveFormsModule } from '@angular/forms';
+import { SpinnerComponent } from '../spinner/spinner.component';
 
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    SpinnerComponent,
+  ],
   imports: [
     CommonModule,
     MatIconModule,
@@ -27,6 +31,7 @@ import { MatChipsModule } from '@angular/material/chips';
     HttpClientModule,
     MatTooltipModule,
     MatChipsModule,
+    ReactiveFormsModule,
   ],
   exports: [
     MatIconModule,
@@ -39,6 +44,8 @@ import { MatChipsModule } from '@angular/material/chips';
     HttpClientModule,
     MatTooltipModule,
     MatChipsModule,
+    ReactiveFormsModule,
+    SpinnerComponent,
   ]
 })
 export class SharedModule { }

@@ -7,10 +7,10 @@ export class UtilityService {
 
   constructor() { }
 
-  dateToUnix(date: Date) {
+  dateToISO(date: Date) {
     if(!(date instanceof Date)) {
       return;
     }
-    return (date.getTime() / 1000).toFixed(0);
+    return date.toISOString();
   }
 }

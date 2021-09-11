@@ -54,7 +54,7 @@ export class ProfileComponent implements OnInit {
 
   initEditForm() {
     this.editForm = this.fb.group({
-      address: [null],
+      turkishAddress: [null],
       institution: [null],
       about: [null],
       phoneNum: [null],
@@ -72,6 +72,7 @@ export class ProfileComponent implements OnInit {
   }
 
   async onSaveEdit() {
+    console.log("to send:", this.editForm.value);
     this.profileService.updateProfile(this.editForm.value).subscribe(resp => {
       if(resp){
         this.resetEditMode();

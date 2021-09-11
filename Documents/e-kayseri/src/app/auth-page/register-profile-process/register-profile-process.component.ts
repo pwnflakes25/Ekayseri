@@ -123,12 +123,12 @@ export class RegisterProfileProcessComponent implements OnInit {
 
   formatDates() {
     this.basicInfoForm.patchValue({
-      dateOfBirth: this.utilService.dateToUnix(
+      dateOfBirth: this.utilService.dateToISO(
         this.basicInfoForm.get('dateOfBirth').value
       ),
     });
     this.educationForm.patchValue({
-      dateOfArrival: this.utilService.dateToUnix(
+      dateOfArrival: this.utilService.dateToISO(
         this.educationForm.get('dateOfArrival').value
       ),
     });
