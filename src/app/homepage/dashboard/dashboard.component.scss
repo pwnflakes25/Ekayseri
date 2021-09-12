@@ -31,8 +31,7 @@
 
       &:active {
         background: linear-gradient(145deg, #ffffff, #dadada);
-        box-shadow:  9px 9px 18px #d0d0d0,
-                     -9px -9px 18px #ffffff;
+        box-shadow: 9px 9px 18px #d0d0d0, -9px -9px 18px #ffffff;
       }
     }
   }
@@ -42,6 +41,10 @@
     flex-direction: column;
     grid-column: 1/2;
     grid-row: 1/2;
+
+    .mat-paginator {
+      background: transparent;
+    }
 
     .cards {
       display: flex;
@@ -53,6 +56,13 @@
 
         .title {
           font-weight: 500;
+          min-height: 2.7rem;
+          max-height: 2.7rem;
+          display: -webkit-box;
+          max-width: 200px;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
         }
 
         .view-event {

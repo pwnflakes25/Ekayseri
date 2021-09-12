@@ -2,7 +2,14 @@
     <p class="header">Dashboard</p>
     <div class="container-box">
         <div class="upcoming-events">
-            <p class="subheader">Upcoming Events <span class="add-button" (click)="addEvent()"><mat-icon>add</mat-icon></span></p>
+            <p class="subheader">Upcoming Events
+                <span class="add-button" (click)="addEvent()">
+                <mat-icon>add</mat-icon></span>
+                <mat-paginator #eventPaginator
+                    [ngClass]="{ 'hide': allEvents?.length <= 0, 'hide-pagination-buttons': allEvents?.length <= 5 }"
+                    [length]="allEvents?.length" [hidePageSize]="true" [pageSize]="[5]" showFirstLastButtons>
+                </mat-paginator>
+            </p>
             <app-spinner *ngIf="!(events$ | async)"></app-spinner>
             <div class="cards" *ngIf="(events$ | async)">
                 <div class="card" *ngFor="let event of events$ | async">

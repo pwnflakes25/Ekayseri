@@ -12,6 +12,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatChipsModule } from '@angular/material/chips';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SpinnerComponent } from '../spinner/spinner.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 
 
@@ -32,6 +33,7 @@ import { SpinnerComponent } from '../spinner/spinner.component';
     MatTooltipModule,
     MatChipsModule,
     ReactiveFormsModule,
+    MatPaginatorModule,
   ],
   exports: [
     MatIconModule,
@@ -46,6 +48,7 @@ import { SpinnerComponent } from '../spinner/spinner.component';
     MatChipsModule,
     ReactiveFormsModule,
     SpinnerComponent,
+    MatPaginatorModule,
   ]
 })
 export class SharedModule { }

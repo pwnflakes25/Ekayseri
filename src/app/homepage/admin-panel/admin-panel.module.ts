@@ -9,7 +9,6 @@ import { AdminEventComponent } from './admin-event/admin-event.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import {MatCheckboxModule} from '@angular/material/checkbox';
-import {MatPaginatorModule} from '@angular/material/paginator';
 
 
 
@@ -26,7 +25,6 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     MatTableModule,
     MatSortModule,
     MatCheckboxModule,
-    MatPaginatorModule,
   ]
 })
 export class AdminPanelModule { }

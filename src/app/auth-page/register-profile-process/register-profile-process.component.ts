@@ -12,6 +12,7 @@ import { BehaviorSubject } from 'rxjs';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { ProfileService } from 'src/app/shared/services/profile.service';
 import { UtilityService } from 'src/app/shared/services/utility.service';
+import {INDONESIAN_PROVINCES, TURKISH_PROVINCES, EDUCATION_LEVEL, FACULTIES, JALUR} from 'src/app/shared/statics/static';
 declare const M: any;
 
 @Component({
@@ -28,6 +29,11 @@ export class RegisterProfileProcessComponent implements OnInit {
   aboutMeForm: FormGroup;
   emergencyContactForm: FormGroup;
   currentStep: number = 1;
+  EDUCATION_LEVEL = EDUCATION_LEVEL;
+  INDONESIAN_PROVINCES = INDONESIAN_PROVINCES;
+  TURKISH_PROVINCES = TURKISH_PROVINCES;
+  FACULTIES = FACULTIES;
+  JALUR = JALUR;
   formState: { isCompleted: boolean; savedForm: Object }[] = [
     {
       isCompleted: false,

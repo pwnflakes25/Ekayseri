@@ -43,7 +43,7 @@ const routes: Routes = [
     component: AuthPageComponent,
   },
   {
-    path: 'create-profile/:id',
+    path: 'create-profile',
     component: RegisterProfileProcessComponent,
   },
 ];
