@@ -1,0 +1,34 @@
+<section *ngIf="(userDebt$ | async) as userDebt">
+    <p class="header">My Debt</p>
+    <div class="card debt-data">
+        <div>
+            <p class="number-label"><mat-icon>payments</mat-icon> My Current Debt</p>
+            <p class="number">{{userDebt?.accumulatedPayment?.unpaid}} <sub>TL</sub> </p>
+        </div>
+        <div>
+            <p class="number-label"><mat-icon>price_check</mat-icon> Total Debt Paid</p>
+            <p class="number">{{userDebt?.accumulatedPayment?.paid}} <sub>TL</sub> </p>
+        </div>
+    </div>
+    <div class="card debt-list-container">
+        <p class="subheader">Debt History</p>
+        <ng-container *ngIf="userDebt?.userPaymentData?.length">
+            <div class="debt-list" *ngFor="let debt of userDebt?.userPaymentData">
+                <div class="debt-item">
+                    <p>Amount: <span>{{debt.amount}}</span></p>
+                    <p>Date Issued: <span>{{debt.date | date}}</span></p>
+                    <p>Status: <span>{{debt.paid ? 'Paid' : 'Unpaid'}}</span></p>
+                </div>
+                <div class="divider"></div>
+            </div>
+        </ng-container>
+        <ng-container *ngIf="!userDebt?.userPaymentData?.length">
+            <div class="empty-result">  
+                <mat-icon>feedback</mat-icon>
+                <p>Sejarah Kas Kosong!</p>
+            </div>
+        </ng-container>
+        
+    </div>
+</section>
+<app-spinner *ngIf="!(userDebt$ | async)"></app-spinner>

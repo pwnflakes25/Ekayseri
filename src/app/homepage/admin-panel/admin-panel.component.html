@@ -1,0 +1,28 @@
+<section>
+    <p class="header">Panel Admin</p>
+    <div class="main-container">
+        <div class="menu-section">
+            <div class="card" [routerLink]="['./events']" routerLinkActive="active-card">
+                <div>
+                    <mat-icon>event</mat-icon>
+                </div>
+                <p>Event</p>
+            </div>
+            <div class="card" [routerLink]="['./uang-kas']" routerLinkActive="active-card" >
+                <div>
+                    <mat-icon class="material-icons-round">money</mat-icon>
+                </div>
+                <p>Uang Kas</p>
+            </div>
+            <div class="card">
+                <div>
+                    <mat-icon>article</mat-icon>
+                </div>
+                <p>News</p>
+            </div>
+        </div>
+        <div class="content-section">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,125 @@
+<section>
+
+    <div class="card">
+        <p class="subheader">Isu Kas <button (click)="onIssueDebt()" [disabled]="!userSelection.selected.length"
+                class="btn action-btn">
+                <mat-icon>add</mat-icon>Isu Uang Kas
+            </button></p>
+
+        <div class="setting-header row justify-content-between">
+            <div class="user-search-field input-field col s3">
+                <i class="material-icons prefix">search</i>
+                <input type="text" placeholder="Search User" [formControl]="userSearchInput" name="userSearch">
+            </div>
+            <div class="col s9">
+                <mat-paginator #userPaginator
+                    [ngClass]="{ 'hide': userDataCount <= 0, 'hide-pagination-buttons': userDataCount <= 10 }"
+                    [length]="userDataCount" [hidePageSize]="true" [pageSize]="[10]" showFirstLastButtons>
+                </mat-paginator>
+            </div>
+        </div>
+
+        <table mat-table [dataSource]="userList">
+
+            <ng-container matColumnDef="select">
+                <th mat-header-cell *matHeaderCellDef>
+                    <mat-checkbox (change)="$event ? masterToggle('user') : null"
+                        [checked]="userSelection.hasValue() && isAllSelected('user')"
+                        [indeterminate]="userSelection.hasValue() && !isAllSelected('user')"
+                        [aria-label]="checkboxLabel('user')">
+                    </mat-checkbox>
+                </th>
+
+                <td mat-cell *matCellDef="let row">
+                    <mat-checkbox hidden (click)="$event.stopPropagation()"
+                        (change)="$event ? userSelection.toggle(row) : null" [checked]="userSelection.isSelected(row)">
+                    </mat-checkbox>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="first_name">
+                <th mat-header-cell *matHeaderCellDef> First Name </th>
+                <td mat-cell *matCellDef="let element"> {{ element?.firstName }} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="last_name">
+                <th mat-header-cell *matHeaderCellDef> Last Name </th>
+                <td mat-cell *matCellDef="let element"> {{ element?.lastName }} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="loading">
+                <th mat-header-cell *matHeaderCellDef colspan="4" class="text-center">
+                    <app-spinner></app-spinner>
+                </th>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedUserTableColumns" sticky></tr>
+            <tr mat-header-row *matHeaderRowDef="['loading']" [hidden]="!isLoading"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedUserTableColumns"></tr>
+        </table>
+    </div>
+
+    <div class="card">
+        <p class="subheader">Cek Kas <button (click)="onVerifyDebt()" [disabled]="!debtSelection.selected.length"
+                class="btn action-btn">
+                <mat-icon class="material-icons-outlined">check_circle</mat-icon>Verifikasi Kas
+            </button></p>
+
+        <div class="setting-header row justify-content-between">
+            <div class="user-search-field input-field col s3">
+                <i class="material-icons prefix">search</i>
+                <input type="text" placeholder="Search Debt" [formControl]="debtSearchInput" name="debtSearch">
+            </div>
+            <div class="col s9">
+                <mat-paginator #debtPaginator
+                    [ngClass]="{ 'hide': debtDataCount <= 0, 'hide-pagination-buttons': debtDataCount <= 10 }"
+                    [length]="debtDataCount" [hidePageSize]="true" [pageSize]="[10]" showFirstLastButtons>
+                </mat-paginator>
+            </div>
+        </div>
+
+        <table mat-table [dataSource]="debtList">
+
+            <ng-container matColumnDef="select">
+                <th mat-header-cell *matHeaderCellDef>
+                    <mat-checkbox (change)="$event ? masterToggle('debt') : null"
+                        [checked]="debtSelection.hasValue() && isAllSelected('debt')"
+                        [indeterminate]="debtSelection.hasValue() && !isAllSelected('debt')"
+                        [aria-label]="checkboxLabel('debt')">
+                    </mat-checkbox>
+                </th>
+
+                <td mat-cell *matCellDef="let row">
+                    <mat-checkbox hidden (click)="$event.stopPropagation()"
+                        (change)="$event ? debtSelection.toggle(row) : null" [checked]="debtSelection.isSelected(row)">
+                    </mat-checkbox>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef> Name </th>
+                <td mat-cell *matCellDef="let element"> {{ element?.name }} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="date_issued">
+                <th mat-header-cell *matHeaderCellDef> Tanggal Isu </th>
+                <td mat-cell *matCellDef="let element"> {{ element?.date | date }} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="status">
+                <th mat-header-cell *matHeaderCellDef> Status </th>
+                <td mat-cell *matCellDef="let element"> {{ element?.paid }} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="loading">
+                <th mat-header-cell *matHeaderCellDef colspan="4" class="text-center">
+                    <app-spinner></app-spinner>
+                </th>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedDebtTableColumns; sticky: true"></tr>
+            <tr mat-header-row *matHeaderRowDef="['loading']" [hidden]="!isLoading"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedDebtTableColumns"></tr>
+        </table>
+    </div>
+</section>

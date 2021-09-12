@@ -1,0 +1,176 @@
+<section>
+    <div class="card register-card">
+        <div class="stepper-indicator">
+            <div class="circle-step" *ngFor="let step of formState; let i = index" [ngStyle]="{'background-color': currentStep === i + 1 ? '#2F4858' : '#dfe1ee'}">{{i + 1}}</div>
+        </div>
+        <form *ngIf="currentStep === 1" [formGroup]="basicInfoForm">
+            <div class="header">
+                <p>Basic Information</p>
+            </div>
+            <div class="row">
+                <div class="input-field col s6">
+                    <input type="text" formControlName="firstName" class="validate" name="first_name" required>
+                    <label class="active">First Name</label>
+                    <span class="helper-text" data-error="Field ini wajib di isi"></span>
+                </div>
+                <div class="input-field col s6">
+                    <input type="text" formControlName="lastName" class="validate" name="first_name" required>
+                    <label class="active">Last Name</label>
+                    <span class="helper-text" data-error="Field ini wajib di isi"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s6">
+                    <mat-form-field>
+                        <input matInput formControlName="dateOfBirth" (click)="picker.open()" [matDatepicker]="picker">
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                    <label>Tanggal Lahir</label>
+                </div>
+                <div class="input-field col s6">
+                    <mat-form-field appearance="legacy" class="select-input">
+                        <mat-select formControlName="sex">
+                            <mat-option>None</mat-option>
+                            <mat-option value="male">Laki-Laki</mat-option>
+                            <mat-option value="female">Perempuan</mat-option>
+                            <mat-option value="other">Others</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <label>Jenis Kelamin</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input type="tel" class="validate" formControlName="phoneNum" name="first_name" required>
+                    <label class="active">Nomer Telp</label>
+                    <span class="helper-text" data-error="Field ini wajib di isi"></span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-field col s12">
+                    <input type="text" class="validate" formControlName="turkishAddress" name="first_name" required>
+                    <label class="active">Alamat (Turki)</label>
+                    <span class="helper-text" data-error="Field ini wajib di isi"></span>
+                </div>
+            </div>
+        </form>
+
+        <form *ngIf="currentStep === 2" [formGroup]="educationForm">
+            <div class="header">
+                <p>Education Information</p>
+            </div>
+            <div class="row">
+                <div class="input-field col s6">
+                    <mat-form-field>
+                        <input matInput (click)="picker.open()" formControlName="dateOfArrival" [matDatepicker]="picker">
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                    <label>Tanggal Masuk Ke Turki</label>
+                </div>
+                <div class="input-field col s6">
+                    <mat-form-field appearance="legacy" class="select-input">
+                        <mat-select formControlName="educationLevel">
+                            <mat-option>None</mat-option>
+                            <mat-option *ngFor="let level of EDUCATION_LEVEL" [value]="level">{{level}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <label>Level Pendidikan</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input type="text" formControlName="institution" class="validate" name="first_name" required>
+                    <label class="active">Nama Institusi Pendidikan</label>
+                    <span class="helper-text" data-error="Field ini wajib di isi"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <mat-form-field appearance="legacy" class="select-input">
+                        <mat-select formControlName="faculty">
+                            <mat-option>None</mat-option>
+                            <mat-option *ngFor="let faculty of FACULTIES" [value]="faculty">{{faculty}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <label class="active">Fakultas</label>
+                    <span class="helper-text" data-error="Field ini wajib di isi"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s6">
+                    <mat-form-field appearance="legacy" class="select-input">
+                        <mat-select formControlName="turkishProvince">
+                            <mat-option>None</mat-option>
+                            <mat-option *ngFor="let province of TURKISH_PROVINCES" [value]="province">{{province}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <label>Provinsi</label>
+                </div>
+                <div class="input-field col s6">
+                    <mat-form-field appearance="legacy" class="select-input">
+                        <mat-select formControlName="jalur">
+                            <mat-option>None</mat-option>
+                            <mat-option *ngFor="let jalur of JALUR" [value]="jalur">{{jalur}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <label>Jalur</label>
+                </div>
+            </div>
+        </form>
+
+        <form *ngIf="currentStep === 3" [formGroup]="aboutMeForm">
+            <div class="header">
+                <p>Background Information</p>
+            </div>
+            <div class="row">
+                <div class="input-field col s6">
+                    <mat-form-field appearance="legacy" class="select-input">
+                        <mat-select formControlName="indonesianProvince">
+                            <mat-option>None</mat-option>
+                            <mat-option *ngFor="let province of INDONESIAN_PROVINCES" [value]="province">{{province}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <label>Provinsi Asal (Indonesia)</label>
+                </div>
+            </div>
+            <div class="input-field col s12">
+                <textarea formControlName="about" id="textarea1" class="materialize-textarea"></textarea>
+                <label class="active" for="textarea1">About Me</label>
+              </div>
+        </form>
+
+        <form *ngIf="currentStep === 4" [formGroup]="emergencyContactForm">
+            <div class="header">
+                <p>Emergency Contact Information</p>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input type="text" class="validate" formControlName="guardianName" name="guardianName" required>
+                    <label class="active">Nama Wali</label>
+                    <span class="helper-text" data-error="Field ini wajib di isi"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input type="text" class="validate" formControlName="indonesianAddress" name="indo_address" required>
+                    <label class="active">Alamat (Indonesia)</label>
+                    <span class="helper-text" data-error="Field ini wajib di isi"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input type="tel" class="validate" formControlName="guardianPhoneNumber" name="guardianName" required>
+                    <label class="active">Nomer Telp Wali</label>
+                    <span class="helper-text" data-error="Field ini wajib di isi"></span>
+                </div>
+            </div>
+        </form>
+
+        <div class='button-container'>
+            <a *ngIf="currentStep !== 1" (click)="onPreviousStep()">BACK</a>
+            <button *ngIf="currentStep !== 4" [disabled]="isFormInvalid()" class="waves-effect waves-light btn" (click)="onNextStep()">Next</button>
+            <button *ngIf="currentStep === 4" class="waves-effect waves-light btn" (click)="onRegister()">Done</button>
+        </div>
+    </div>
+</section>

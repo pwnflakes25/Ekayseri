@@ -1,0 +1,47 @@
+<section>
+    <div class="sidebar">
+        <div class="navigations">
+            <div class="avatar" [routerLink]="['/profile']"
+                [ngStyle]="{'border-color':(selectedTab === 0) ? '#FF7070' : '#9ba1ca'}" (click)='selectedTab = 0'>
+            </div>
+
+            <a [routerLink]="['/']" (click)='selectedTab = 1'>
+                <mat-icon  matTooltip="Home" matTooltipPosition="right" [ngStyle]="{'color':(selectedTab === 1) ? '#FF7070' : '#9ba1ca'}" aria-hidden="false"
+                    aria-label="Example home icon">
+                    home
+                </mat-icon>
+            </a>
+
+            <a (click)='selectedTab = 2'>
+                <mat-icon matTooltip="Settings" matTooltipPosition="right" [ngStyle]="{'color':(selectedTab === 2) ? '#FF7070' : '#9ba1ca'}" aria-hidden="false"
+                    aria-label="Example home icon">
+                    settings
+                </mat-icon>
+            </a>
+
+            <a [routerLink]="['/my-debt']" (click)='selectedTab = 3'>
+                <mat-icon matTooltip="Uang Kas" matTooltipPosition="right" [ngStyle]="{'color':(selectedTab === 3) ? '#FF7070' : '#9ba1ca'}" aria-hidden="false"
+                    aria-label="Example home icon">
+                    monetization_on
+                </mat-icon>
+            </a>
+            <a [routerLink]="['/admin-panel']" (click)='selectedTab = 4'>
+                <mat-icon id="admin" matTooltip="Panel Admin" matTooltipPosition="right" [ngStyle]="{'color':(selectedTab === 4) ? '#FF7070' : '#9ba1ca'}" aria-hidden="false"
+                    aria-label="Admin Panel">
+                    admin_panel_settings
+                </mat-icon>
+            </a>
+            <a (click)='onSignout()'>
+                <mat-icon id="logout-button" matTooltip="Keluar" matTooltipPosition="right" [ngStyle]="{'color':(selectedTab === 5) ? '#FF7070' : '#9ba1ca'}" aria-hidden="false"
+                    aria-label="Example home icon">
+                    logout
+                </mat-icon>
+            </a>
+        </div>
+    </div>
+    <div class="main-content">
+        <div class="content-box">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</section>
