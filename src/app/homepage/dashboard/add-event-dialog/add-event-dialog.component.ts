@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { ProfileService } from 'src/app/shared/services/profile.service';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { EventObject, EventService } from 'src/app/shared/services/event.service';
 import { UtilityService } from 'src/app/shared/services/utility.service';
 
@@ -24,23 +24,33 @@ export class AddEventDialogComponent implements OnInit {
     private authService: AuthService,
     private profileService: ProfileService,
     private utilService: UtilityService,
-    public dialogRef: MatDialogRef<AddEventDialogComponent>
+    public dialogRef: MatDialogRef<AddEventDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data
   ) {}
 
   ngOnInit(): void {
     this.initEventForm();
+    if(this.data) {
+      this.patchForm();
+    }
   }
 
   initEventForm() {
     this.eventForm = this.fb.group({
       eventTitle: ['', Validators.required],
-      eventDuration: ['', Validators.required],
+      eventDuration: ["1", Validators.required],
       eventDescription: ['', Validators.required],
       authorName: [''],
       eventLocation: ['', Validators.required],
       date: ['', Validators.required],
+      fromTime: ['', Validators.required],
+      toTime: ['', Validators.required],
       tags: [['PPI']],
     });
+  }
+
+  patchForm() {
+    this.eventForm.patchValue(this.data);
   }
 
   addTag(event: MatChipInputEvent): void {
@@ -77,13 +87,21 @@ export class AddEventDialogComponent implements OnInit {
       this.eventForm.patchValue({
         authorName: `${userProfile[0].firstName} ${userProfile[0].lastName}`,
       });
-      await this.createEvent(this.eventForm.value);
+      if(this.data) {
+        await this.editEvent(this.eventForm.value);
+      } else {
+        await this.createEvent(this.eventForm.value);
+      }
       this.isLoading = false;
       this.dialogRef.close(this.eventForm.value);
     } catch (error) {
       this.isLoading = false;
       console.log(error);
     }
+  }
+
+  editEvent(payload: EventObject) {
+    return this.eventService.editEvent(payload).toPromise();
   }
 
   createEvent(payload: EventObject) {

@@ -34,6 +34,12 @@ export class EventService {
     return this.http.post(url, payload);
   }
 
+  editEvent(payload: EventObject) {
+    const url =
+      'https://p7fzv5b9q5.execute-api.eu-central-1.amazonaws.com/dev/ekayseri/events/update';
+    return this.http.put(url, payload);
+  }
+
   getEvents() {
     const url =
       'https://p7fzv5b9q5.execute-api.eu-central-1.amazonaws.com/dev/ekayseri/events/all';
@@ -49,7 +55,7 @@ export class EventService {
   deleteEvent(eventId: string, date: string) {
     const url =
     'https://p7fzv5b9q5.execute-api.eu-central-1.amazonaws.com/dev/ekayseri/events';
-    return this.http.delete(url);
+    return this.http.delete(url, {params: {eventId, date}});
   }
 
   joinEvent(payload: JoinEvent) {

@@ -7,7 +7,9 @@ body {
   background-color: #dfe1ee;
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+  overflow-x: hidden;
 }
+
 
 .mat-form-field:not(.select-input) .mat-form-field-underline {
   display: none;
@@ -155,4 +157,12 @@ body {
     font-size: 90px;
     margin-right: 3rem;
   }
+}
+
+.timepicker-overlay {
+  z-index: 10000000 !important;
+}
+
+.timepicker-backdrop-overlay {
+  z-index: 10000000 !important;
 }

@@ -1,3 +1,4 @@
+import { ThrowStmt } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
@@ -16,6 +17,7 @@ export class EventDetailComponent implements OnInit {
   event$: Observable<any>;
   eventData: any;
   currentUser: any;
+  isLoading = false;
 
   constructor(
     private sanitizer: DomSanitizer,
@@ -41,10 +43,21 @@ export class EventDetailComponent implements OnInit {
   fetchEvent(eventId: string, date: string) {
     this.event$ = this.eventService.getEvent(eventId, date).pipe(map((eventObj: any) => {
       eventObj[0].hasJoined =  eventObj[0].participants.find(user => user.userId === this.currentUser.attributes.sub) ? true : false;
-      console.log(eventObj[0].hasJoined);
+      eventObj[0].fromTime = this.formatTimeTo12H(eventObj[0].fromTime) || null;
+      eventObj[0].toTime = this.formatTimeTo12H(eventObj[0].toTime) ||null;
       return eventObj[0];
     }));
   }
+
+  formatTimeTo12H(time24) {
+    let ts = time24;
+    let H = +ts.substr(0, 2);
+    let h: any = (H % 12) || 12;
+    h = (h < 10)? ("0"+h):h;  // leading 0 at the left for 1 digit hours
+    let ampm = H < 12 ? " AM" : " PM";
+    ts = h + ts.substr(2, 3) + ampm;
+    return ts;
+  };
 
   imgUrl(url: string) {
     return this.sanitizer.bypassSecurityTrustStyle(`url(${url})`);
@@ -52,6 +65,7 @@ export class EventDetailComponent implements OnInit {
 
   async onJoinEvent() {
     try {
+      this.isLoading = true;
       const token = (await this.authService.getSession())
       .getAccessToken()
       .getJwtToken();
@@ -68,6 +82,7 @@ export class EventDetailComponent implements OnInit {
       console.log("payload is:", payload);
       await this.eventService.joinEvent(payload).toPromise();
       this.fetchEvent(this.eventData.eventId, this.eventData.date);
+      this.isLoading = false;
     } catch (error) {
       console.log(error); 
     }

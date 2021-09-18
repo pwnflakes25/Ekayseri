@@ -1,97 +1,172 @@
-@import '../../library';
+@import "../../library";
+
+html {
+  overflow-x: hidden;
+}
+
+:host ::ng-deep .input-field>label {
+  color: $dark-blue;
+  font-weight: bold;
+}
+
+// :host ::ng-deep .input-field input[type="text"] + label,
+// :host ::ng-deep .input-field input[type="email"] + label,
+// :host ::ng-deep .input-field input[type="password"] + label {
+//   color: $dark-blue;
+//   font-weight: bold;
+// }
+/* label underline focus color */
+:host ::ng-deep .input-field input[type="text"],
+:host ::ng-deep .input-field input[type="password"],
+:host ::ng-deep .input-field input[type="email"] {
+  border-bottom: 1px solid $pink !important;
+  box-shadow: 0 1px 0 0 $pink !important;
+}
+
+// :host ::ng-deep .input-field input[type="text"]:focus + label,
+// :host ::ng-deep .input-field input[type="email"]:focus + label,
+// :host ::ng-deep .input-field input[type="password"]:focus + label {
+//   color: $dark-blue;
+//   font-weight: bold;
+// }
+/* label underline focus color */
+:host ::ng-deep .input-field input[type="text"]:focus {
+  border-bottom: 1px solid $pink !important;
+  box-shadow: 0 1px 0 0 $pink !important;
+}
 
 body {
-    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-    padding: 0;
-  }
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  padding: 0;
+}
 
-  #signup .input-field {
-    margin-top: 0;
-    margin-bottom: 0;
-  }
-  
-  a {
-    color: $pink;
-    cursor: pointer;
-  }
-  
-  .modal-trigger{
-    margin: 2rem;
-  }
-  
-  .logout{
-    font-weight: bold;
-  }
-  
-  .welcome-h1{
-    text-align: center;
-    font-style: bold
-  }
-  
+.illustration {
+  height: 70vh;
+  width: 40vw;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background: url("../../assets/person-sitting.png");
+}
 
-  
-  .welcome-container{
-    padding: 2rem;
-    text-align: center;
-  }
-  
-  
-  .login-section {
-    display: grid;
-    grid-template-columns: 10fr   10fr;
-    min-height: 100vh;
-  }
-  
-  
-  .side1 {
-    padding: 3rem;
-    grid-column: 1/2;
-    background-color: #dfe1ee;
-  }
-  
-  .side2 {
-    grid-column: 2/3;
-    background-color: #f4f4fc;
-    padding: 3rem;
-  }
-  
-  .budak {
-    display: block;
-    width: 70%;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  
-  .logo{
-    font-size: 18px;
-    color: #4f6473;
-    font-weight: bold;
-  }
-  
-  .greetings{
-    font-size: 24px;
-    color: #4f6473;
-    font-weight: bold;
-    margin-bottom:2rem;
-    text-align: left;
-  }
+.pattern-left {
+  height: 40vh;
+  width: 40vw;
+  z-index: 0;
+  position: absolute;
+  top: 100px;
+  left: -26rem;
+  opacity: 0.9;
+  transform: rotate(45deg);
+  background-position: center;
+  background-size: contain !important;
+  background-repeat: no-repeat;
+  background: url("../../assets/pattern.png");
+}
 
-  .greetings2{
-    text-align: center;
-    font-size: 28px;
-    color: #4f6473;
-    font-weight: bold;
-  
-  }
-  
-  .greetings3{
-    text-align: center;
-    font-size: 16px;
-    color: #a9a8a8;
-    font-weight: bold;
-  }
-  
-  
-  .btn {
-    background-color: #ff7070;
-  }
+.pattern-right {
+  height: 40vh;
+  width: 40vw;
+  z-index: 0;
+  position: absolute;
+  top: 100px;
+  right: -26rem;
+  opacity: 0.9;
+  transform: rotate(45deg);
+  background-position: center;
+  background-size: contain !important;
+  background-repeat: no-repeat;
+  background: url("../../assets/pattern.png");
+}
+
+#signup .input-field {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.eye-icon {
+  position: absolute;
+  right: 20px;
+  top: 10px;
+  cursor: pointer;
+  color: $dark-blue;
+}
+
+a {
+  color: $pink;
+  cursor: pointer;
+}
+
+.modal-trigger {
+  margin: 2rem;
+}
+
+.logout {
+  font-weight: bold;
+}
+
+.welcome-h1 {
+  text-align: center;
+  font-style: bold;
+}
+
+.welcome-container {
+  padding: 2rem;
+  text-align: center;
+}
+
+.login-section {
+  display: grid;
+  grid-template-columns: 10fr 10fr;
+  min-height: 100vh;
+  max-height: 100vh;
+  overflow: hidden;
+}
+
+.side1 {
+  padding: 3rem;
+  grid-column: 1/2;
+  background-color: $pink;
+  overflow: hidden;
+}
+
+.side2 {
+  grid-column: 2/3;
+  background-color: white;
+  padding: 3rem;
+}
+
+.logo {
+  font-size: 18px;
+  color: #4f6473;
+  font-weight: bold;
+}
+
+.greetings {
+  font-size: 32px;
+  color: white;
+  font-weight: bold;
+  line-height: 1.5;
+  margin-bottom: 2rem;
+  text-align: left;
+  max-width: 37rem;
+}
+
+.greetings2 {
+  text-align: center;
+  font-size: 28px;
+  color: #4f6473;
+  font-weight: bold;
+}
+
+.greetings3 {
+  text-align: center;
+  font-size: 16px;
+  color: #a9a8a8;
+  font-weight: bold;
+}
+
+.btn {
+  background-color: #ff7070;
+  font-weight: bold;
+}

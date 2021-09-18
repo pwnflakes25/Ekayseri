@@ -1,0 +1,13 @@
+<p *ngIf="dates?.length" class="month">{{dates[0] | date: 'MMMM'}}</p>
+<div class="calendar">
+    <ng-container *ngIf="dates?.length">
+        <div *ngFor="let date of dates; let i = index" class="day">
+            <div class="oval-box" [ngClass]="(date | date ) === (today | date ) ? 'active-day' : 'non-active-day'">
+                {{date | date: 'EE'}}
+            </div>
+            <p class="date-label">
+                {{date | date: 'd'}}
+            </p>
+        </div>
+    </ng-container>
+</div>
