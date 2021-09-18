@@ -4,7 +4,8 @@
         <div class="upcoming-events">
             <p class="subheader">Upcoming Events
                 <span class="add-button" (click)="addEvent()">
-                <mat-icon>add</mat-icon></span>
+                    <mat-icon>add</mat-icon>
+                </span>
                 <mat-paginator #eventPaginator
                     [ngClass]="{ 'hide': allEvents?.length <= 0, 'hide-pagination-buttons': allEvents?.length <= 5 }"
                     [length]="allEvents?.length" [hidePageSize]="true" [pageSize]="[5]" showFirstLastButtons>
@@ -16,7 +17,9 @@
                     <p class="title">{{event?.eventTitle}}</p>
                     <p class='date'>{{event?.date | date}}</p>
                     <p class='description'>{{event.eventDescription}}</p>
-                    <div><button [routerLink]="['/event-detail']" [queryParams]="{eventId: event?.eventId, date: event?.date}" class="btn">Detil</button></div>
+                    <div><button [routerLink]="['/event-detail']"
+                            [queryParams]="{eventId: event?.eventId, date: event?.date}" class="btn">Detil</button>
+                    </div>
                     <p class="quota">{{event?.participants?.length}} people joined</p>
                 </div>
             </div>
@@ -24,26 +27,40 @@
         <div class="calendar">
             <p class="subheader">Calendar</p>
             <div class="card">
-
+                <app-calendar></app-calendar>
             </div>
         </div>
         <div class="news">
-            <p class="subheader">News</p>
+            <p class="subheader">Announcements</p>
             <div class="card">
-                <div class="news-item" *ngFor="let item of news"> 
+                <!-- <div class="news-item" *ngFor="let item of (announcements$ | async)?.announcementsArray"> 
                     <div class="news-item-header">
                         <p>{{item.title}}</p>
-                        <p>{{item.date}}</p>
+                        <p>{{item.date | date}}</p>
                         <button class="btn">Read More</button>
                     </div>
                     <p>{{item.description}}</p>
                     <div class="divider"></div>
-                </div>
+                </div> -->
+                <drag-scroll #nav (indexChanged)="onChangeIndex($event)" [scrollbar-hidden]="true" [drag-scroll-y-disabled]="true">
+                    <div class="announcement-item" *ngFor="let item of (announcements$ | async)?.announcementsArray; let i = index" drag-scroll-item>
+                        <p class="title">{{item?.title}} <span class="page">{{i + 1}}/{{(announcements$ | async)?.announcementsArray?.length}}</span></p>
+                        <p class="author">{{item?.authorName}}</p>
+                        <p class="date">{{item?.date | date}}</p>
+                        <p class="content">{{item?.content}}</p>
+                    </div>
+                </drag-scroll>
+
+                <div class="card nav-button left" mat-icon-button (click)="moveLeft()"><mat-icon>chevron_left</mat-icon></div>
+                <div class="card nav-button" mat-icon-button (click)="moveRight()"><mat-icon>chevron_right</mat-icon></div>
+                  
             </div>
         </div>
         <div class="promoted">
             <p class="subheader">Promoted</p>
-            <div class="card"></div>
+            <div class="card">
+                
+            </div>
         </div>
     </div>
 </Section>

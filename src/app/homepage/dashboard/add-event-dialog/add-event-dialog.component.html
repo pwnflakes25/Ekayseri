@@ -7,13 +7,26 @@
             <div class="row">
                 <div class="input-field col s6" id="datePickerField">
                     <mat-form-field>
-                        <input matInput placeholder="Tanggal Acara" formControlName="date" (click)="picker.open()" [matDatepicker]="picker">
+                        <input matInput readonly placeholder="Tanggal Acara" formControlName="date" (click)="picker.open()" [matDatepicker]="picker">
                         <mat-datepicker #picker></mat-datepicker>
                     </mat-form-field>
                 </div>
                 <div class="input-field col s6">
                     <input type="number" formControlName="eventDuration" class="validate" name="duration" required>
                     <label class="active">Durasi (hari)</label>
+                    <span class="helper-text" data-error="Field ini wajib di isi"></span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-field col s6">
+                    <input type="time" formControlName="fromTime">
+                    <label class="active">Jam Mulai</label>
+                    <span class="helper-text" data-error="Field ini wajib di isi"></span>
+                </div>
+                <div class="input-field col s6">
+                    <input type="time" formControlName="toTime" >
+                    <label class="active">Jam Selesai</label>
                     <span class="helper-text" data-error="Field ini wajib di isi"></span>
                 </div>
             </div>

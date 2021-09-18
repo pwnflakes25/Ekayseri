@@ -23,6 +23,7 @@ import { EventDetailComponent } from './homepage/event-detail/event-detail.compo
 import { AddEventDialogComponent } from './homepage/dashboard/add-event-dialog/add-event-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { SharedModule } from './shared/modules/shared.module';
+import { CalendarComponent } from './homepage/dashboard/calendar/calendar.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { SharedModule } from './shared/modules/shared.module';
     MyDebtComponent,
     EventDetailComponent,
     AddEventDialogComponent,
+    CalendarComponent,
   ],
   imports: [
     BrowserModule,

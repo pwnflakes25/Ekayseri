@@ -14,8 +14,12 @@
                     <div class="main-number">{{event?.date | date: 'dd'}}</div>
                     <div class="secondary-info">{{event?.date | date: 'MMMM'}}</div>
                 </div>
-                <div class="card">
+                <div class="card" *ngIf="event?.fromTime && event?.toTime">
                     <mat-icon>schedule</mat-icon>
+                    <div class="time">{{event?.fromTime}}  -  {{event?.toTime}}</div>
+                </div>
+                <div class="card">
+                    <mat-icon>hourglass_empty</mat-icon>
                     <div class="main-number">{{event?.eventDuration}}</div>
                     <div class="secondary-info">Days</div>
                 </div>
@@ -36,13 +40,14 @@
         </div>
         <div class="right-side">
             <div class="card event-join">
-                <div>
+                <app-spinner *ngIf="isLoading"></app-spinner>
+                <div *ngIf="!isLoading">
                     <mat-chip-list aria-label="Fish selection">
                         <mat-chip *ngFor="let tag of event?.tags">#{{tag}}</mat-chip>
                     </mat-chip-list>
                 </div>
-                <div class="divider"></div>
-                <div class="action-button-container">
+                <div *ngIf="!isLoading" class="divider"></div>
+                <div *ngIf="!isLoading" class="action-button-container">
                     <button class="btn" [disabled]="!currentUser || event.hasJoined"
                         (click)="onJoinEvent()">{{ event.hasJoin ? 'Sudah Join' : 'Join'}}</button>
                 </div>

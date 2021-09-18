@@ -13,7 +13,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SpinnerComponent } from '../spinner/spinner.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
-
+import { DragScrollModule } from 'ngx-drag-scroll';
 
 
 @NgModule({
@@ -34,6 +34,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatChipsModule,
     ReactiveFormsModule,
     MatPaginatorModule,
+    DragScrollModule,
   ],
   exports: [
     MatIconModule,
@@ -49,6 +50,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     ReactiveFormsModule,
     SpinnerComponent,
     MatPaginatorModule,
+    DragScrollModule
   ]
 })
 export class SharedModule { }

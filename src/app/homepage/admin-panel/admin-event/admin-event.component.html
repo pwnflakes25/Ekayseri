@@ -1,1 +1,65 @@
-<p>admin-event works!</p>
+<section>
+
+    <div class="card">
+        <p class="subheader">Manage Event <button (click)="onAddEvent()"
+                class="btn action-btn">
+                <mat-icon>add</mat-icon>New Event
+            </button></p>
+
+        <div class="setting-header row justify-content-between">
+            <div class="user-search-field input-field col s3">
+                <i class="material-icons prefix">search</i>
+                <input type="text" placeholder="Search Event" [formControl]="eventSearchInput" name="eventSearch">
+            </div>
+            <div class="col s9">
+                <mat-paginator #eventPaginator
+                    [ngClass]="{ 'hide': eventDataCount <= 0, 'hide-pagination-buttons': eventDataCount <= 10 }"
+                    [length]="eventDataCount" [hidePageSize]="true" [pageSize]="[10]" showFirstLastButtons>
+                </mat-paginator>
+            </div>
+        </div>
+
+        <table mat-table [dataSource]="eventList">
+
+            <ng-container matColumnDef="title">
+                <th mat-header-cell *matHeaderCellDef> Title </th>
+                <td mat-cell *matCellDef="let element"> {{ element?.eventTitle }} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="author">
+                <th mat-header-cell *matHeaderCellDef> Creator </th>
+                <td mat-cell *matCellDef="let element"> {{ element?.author?.authorName?.S }} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="date">
+                <th mat-header-cell *matHeaderCellDef> Tanggal </th>
+                <td mat-cell *matCellDef="let element"> {{ element?.date | date }} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="description">
+                <th mat-header-cell *matHeaderCellDef> Detil </th>
+                <td mat-cell *matCellDef="let element" class="description-cell"> {{element?.eventDescription}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef> Actions </th>
+                <td mat-cell *matCellDef="let element" class="actions">
+                    <mat-icon [routerLink]="['/event-detail']"
+                    [queryParams]="{eventId: element?.eventId, date: element?.date}">visibility</mat-icon>
+                    <mat-icon (click)="onEditEvent(element)">edit</mat-icon>
+                    <mat-icon (click)="onDeleteEvent(element)">delete</mat-icon>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="loading">
+                <th mat-header-cell *matHeaderCellDef colspan="4" class="text-center">
+                    <app-spinner></app-spinner>
+                </th>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedEventTableColumns" sticky></tr>
+            <tr mat-header-row *matHeaderRowDef="['loading']" [hidden]="!isLoading"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedEventTableColumns"></tr>
+        </table>
+    </div>
+</section>

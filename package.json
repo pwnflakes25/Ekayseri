@@ -24,6 +24,7 @@
     "@angular/router": "~11.2.10",
     "aws-amplify": "^4.2.3",
     "firebase": "^8.7.1",
+    "ngx-drag-scroll": "^12.0.0-beta.2",
     "rxjs": "~6.6.0",
     "subsink": "^1.0.2",
     "tslib": "^2.0.0",

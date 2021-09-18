@@ -23,8 +23,6 @@ export class AuthService {
     });
   }
 
-  // Sign in with email/password
-  SignIn(email, password) {}
 
   // Sign up with email/password
   async signUp(email, username, password) {
@@ -38,7 +36,7 @@ export class AuthService {
       });
       return user;
     } catch (error) {
-      console.log('error signing up:', error);
+      throw await error;
     }
   }
 
@@ -47,7 +45,7 @@ export class AuthService {
         const user = await Auth.signIn(username, password);
         return user;
     } catch (error) {
-        console.log('error signing in', error);
+        throw await error;
     }
  }
 

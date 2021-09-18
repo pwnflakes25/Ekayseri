@@ -2,83 +2,92 @@
   <div class="side1">
     <p class="logo">E-Kayseri</p>
     <p class="greetings">Welcome!, join over 50 members around Kayseri! sign up now</p>
-    <img src="https://pbs.twimg.com/media/EFLthgLXkAAtQZt?format=jpg&name=medium" class="budak" alt="">
+    <div class="illustration"></div>
+    <div class="pattern-left"></div>
+    <div class="pattern-right"></div>
   </div>
 
   <div class="side2">
     <p class="greetings2">Selamat Datang </p>
     <p class="greetings3">{{isNewUser ? 'Daftar' : 'Login'}}</p>
 
-    <div class="welcome-container" id="login" *ngIf="!isNewUser">
+    <div>
+      <app-spinner *ngIf="isLoading"></app-spinner>
+    </div>
+
+    <div class="welcome-container" id="login" *ngIf="!isNewUser && !isLoading">
       <div class="row">
         <form [formGroup]="authForm" class="col s12">
           <div class="row">
             <div class="input-field col s12">
               <input formControlName="username" type="text" class="validate" name="email" required>
-              <label for="email">Username</label>
+              <label class="active" for="email">Username</label>
               <span class="helper-text" data-error="wrong"></span>
             </div>
           </div>
 
           <div class="row">
             <div class="input-field col s12">
-              <input formControlName="password" id="password" type="password" class="validate" name="password" required>
-              <label for="password">Password</label>
-              <span class="helper-text" data-error="Password Must be Longer than 5 and less than 50 characters"></span>
+              <input formControlName="password" #password id="password" type="password" class="validate" name="password" required>
+              <span><mat-icon class="eye-icon" (click)="password.type = password.type === 'text' ? 'password' : 'text'">{{password.type === 'text' ? 'visibility_off' : 'visibility'}}</mat-icon></span>
+              <label class="active" for="password">Password</label>
+              <span class="helper-text" data-error="Password wajib"></span>
             </div>
           </div>
 
           <!-- onblur="lengthCheckLogin()" onchange="lengthCheckLogin()" onfocus="lengthCheckLogin()" -->
 
-          <button class="waves-effect waves-light btn" type="submit" (click)="onSignin()">Login</button>
+          <button [disabled]="authForm.invalid" class="waves-effect waves-light btn" type="submit" (click)="onSignin()">Login</button>
         </form>
       </div>
       <p class="signup-portal">Belum ada akun? <a (click)="toggleAuthForm()">Daftar </a> dulu!</p>
     </div>
 
-    <div class="welcome-container" id="signup" *ngIf="isNewUser">
+    <div class="welcome-container" id="signup" *ngIf="isNewUser && !isLoading">
       <div class="row">
         <form [formGroup]="authForm" class="col s12">
           <div class="row">
             <div class="input-field col s12">
               <input id="email" formControlName="email" type="email" class="validate" name="email" required>
-              <label for="email">Email</label>
-              <span class="helper-text" data-error="email wajib" ></span>
+              <label class="active" for="email">Email</label>
+              <span class="helper-text" data-error="Format email harus benar dan email wajib" ></span>
             </div>
           </div>
 
           <div class="row">
             <div class="input-field col s12">
               <input id="username" formControlName="username" type="text" class="validate" name="username" required>
-              <label for="username">Username</label>
+              <label class="active" for="username">Username</label>
               <span class="helper-text" data-error="User name wajib" ></span>
             </div>
           </div>
 
-          <div class="row">
+          <div class="row" style="position: relative">
             <div class="input-field col s12">
-              <input id="password" formControlName="password" type="password" class="validate" name="password" required>
-              <label for="password">Password</label>
-              <span class="helper-text" data-error="Password Must be Longer than 5 and less than 50 characters"
+              <input minlength="6" id="password" #passwordInput  formControlName="password" type="password" class="validate" name="password" required>
+              <span><mat-icon class="eye-icon" (click)="passwordInput.type = passwordInput.type === 'text' ? 'password' : 'text'">{{passwordInput.type === 'text' ? 'visibility_off' : 'visibility'}}</mat-icon></span>
+              <label class="active" for="password">Password</label>
+              <span class="helper-text" data-error="Password harus lebih dari 6 char dan satu huruf besar"
                 ></span>
             </div>
           </div>
 
-          <div class="row">
+          <div class="row" style="position: relative;">
             <div class="input-field col s12">
-              <input id="password" type="password" class="validate" name="password" required>
-              <label for="password">Confirm Password</label>
-              <span class="helper-text" data-error="Password Must be Longer than 5 and less than 50 characters"
+              <input minlength="6" #confirmPasswordInput formControlName="confirmPassword" id="confirmPassword" type="password" class="validate" name="confirmPassword" required>
+              <span><mat-icon class="eye-icon" (click)="confirmPasswordInput.type = confirmPasswordInput.type === 'text' ? 'password' : 'text'">{{confirmPasswordInput.type === 'text' ? 'visibility_off' : 'visibility'}}</mat-icon></span>
+              <label class="active" for="confirmPassword">Confirm Password</label>
+              <span class="helper-text" data-error="Konfirmasi password harus sama dengan password"
                 ></span>
             </div>
           </div>
 
           <!-- onblur="lengthCheckLogin()" onchange="lengthCheckLogin()" onfocus="lengthCheckLogin()" -->
 
-          <button class="waves-effect waves-light btn" type="submit" (click)="onSignup()">Daftar</button>
+          <button [disabled]="authForm.invalid" class="waves-effect waves-light btn" type="submit" (click)="onSignup()">Daftar</button>
         </form>
       </div>
-      <p class="signup-portal">Belum ada akun? <a (click)="toggleAuthForm()">Daftar </a> dulu!</p>
+      <p class="signup-portal">Sudah ada akun? <a (click)="toggleAuthForm()">Masuk!</a> </p>
     </div>
   </div>
 

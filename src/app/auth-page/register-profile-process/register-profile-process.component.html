@@ -22,7 +22,7 @@
             <div class="row">
                 <div class="input-field col s6">
                     <mat-form-field>
-                        <input matInput formControlName="dateOfBirth" (click)="picker.open()" [matDatepicker]="picker">
+                        <input readonly matInput formControlName="dateOfBirth" (click)="picker.open()" [matDatepicker]="picker">
                         <mat-datepicker #picker></mat-datepicker>
                     </mat-form-field>
                     <label>Tanggal Lahir</label>
@@ -63,7 +63,7 @@
             <div class="row">
                 <div class="input-field col s6">
                     <mat-form-field>
-                        <input matInput (click)="picker.open()" formControlName="dateOfArrival" [matDatepicker]="picker">
+                        <input matInput readonly (click)="picker.open()" formControlName="dateOfArrival" [matDatepicker]="picker">
                         <mat-datepicker #picker></mat-datepicker>
                     </mat-form-field>
                     <label>Tanggal Masuk Ke Turki</label>
