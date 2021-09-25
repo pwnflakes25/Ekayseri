@@ -1,6 +1,7 @@
 <section>
     <p class="header">Panel Admin</p>
-    <div class="main-container">
+    <app-spinner *ngIf="isLoading"></app-spinner>
+    <div *ngIf="!isLoading" class="main-container">
         <div class="menu-section">
             <div class="card" [routerLink]="['./events']" routerLinkActive="active-card">
                 <div>
