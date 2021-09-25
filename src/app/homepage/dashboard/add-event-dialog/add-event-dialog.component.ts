@@ -77,7 +77,6 @@ export class AddEventDialogComponent implements OnInit {
 
   async formatPayload() {
     this.isLoading = true;
-    this.eventForm.patchValue({ date: this.utilService.dateToISO(this.eventForm.get('date').value)});
     try {
       const token = (await this.authService.getSession())
         .getAccessToken()
@@ -88,8 +87,12 @@ export class AddEventDialogComponent implements OnInit {
         authorName: `${userProfile[0].firstName} ${userProfile[0].lastName}`,
       });
       if(this.data) {
-        await this.editEvent(this.eventForm.value);
+        const payload = this.eventForm.value;
+        console.log(payload);
+        payload.eventId = this.data.eventId;
+        await this.updateEvent(payload);
       } else {
+        this.eventForm.patchValue({ date: this.utilService.dateToISO(this.eventForm.get('date').value)});
         await this.createEvent(this.eventForm.value);
       }
       this.isLoading = false;
@@ -100,7 +103,7 @@ export class AddEventDialogComponent implements OnInit {
     }
   }
 
-  editEvent(payload: EventObject) {
+  updateEvent(payload: EventObject) {
     return this.eventService.editEvent(payload).toPromise();
   }
 

@@ -1,0 +1,29 @@
+    
+    <h2 *ngIf="!isLoading" mat-dialog-title>Buat Announcement Baru</h2>
+
+    <mat-dialog-content>
+        <app-spinner *ngIf="isLoading"></app-spinner>
+        <form *ngIf="!isLoading" [formGroup]="announcementForm">
+            <div class="row">
+                <div class="input-field col s12">
+                    <input type="text" formControlName="title" class="validate" name="duration" required>
+                    <label class="active">Titel</label>
+                    <span class="helper-text" data-error="Field ini wajib di isi"></span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-field col s12">
+                    <!-- <t type="text" formControlName="content" class="validate" name="duration" required> -->
+                    <textarea formControlName="content" cols="30" rows="100" class="validate" class="materialize-textarea" required></textarea>
+                    <label class="active">Content</label>
+                    <span class="helper-text" data-error="Field ini wajib di isi"></span>
+                </div>
+            </div>
+        </form>
+    </mat-dialog-content>
+
+    <mat-dialog-actions *ngIf="!isLoading">
+        <button class="cancel-btn" mat-dialog-close>Cancel</button>
+        <button class="btn" [disabled]="announcementForm.invalid" (click)="onSubmit()">Submit</button>
+      </mat-dialog-actions>

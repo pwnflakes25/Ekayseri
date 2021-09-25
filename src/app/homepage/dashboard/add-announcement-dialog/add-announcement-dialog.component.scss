@@ -1,0 +1,22 @@
+.mat-dialog-content {
+    #datePickerField {
+        margin: 0;
+        padding: 0;
+    }
+
+    textarea {
+        min-height: 10rem !important;
+    }
+}
+
+
+.mat-dialog-actions {
+    .btn {
+        height: fit-content;
+        margin: 10px;
+    }
+
+    .cancel-btn {
+        margin: 10px;
+    }
+}
