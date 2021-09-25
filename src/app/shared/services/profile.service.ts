@@ -34,6 +34,6 @@ export class ProfileService {
 
   updateProfile(payload) {
     const url = 'https://p7fzv5b9q5.execute-api.eu-central-1.amazonaws.com/dev/ekayseri';
-    return this.http.put(url, payload);
+    return this.http.put(url, payload, {params: {updateType: 'updateDetails'}});
   }
 }

@@ -9,6 +9,7 @@ import { AdminEventComponent } from './admin-event/admin-event.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import { AdminAnnouncementComponent } from './admin-announcement/admin-announcement.component';
 
 
 
@@ -16,7 +17,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
   declarations: [
     AdminPanelComponent,
     AdminDebtComponent,
-    AdminEventComponent
+    AdminEventComponent,
+    AdminAnnouncementComponent
   ],
   imports: [
     CommonModule,

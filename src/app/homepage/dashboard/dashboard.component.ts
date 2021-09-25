@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { DragScrollComponent } from 'ngx-drag-scroll';
@@ -7,6 +7,7 @@ import { map, tap } from 'rxjs/operators';
 import { AnnouncementService } from 'src/app/shared/services/announcement.service';
 import { EventService } from 'src/app/shared/services/event.service';
 import { SubSink } from 'subsink';
+import { AddAnnouncementDialogComponent } from './add-announcement-dialog/add-announcement-dialog.component';
 import { AddEventDialogComponent } from './add-event-dialog/add-event-dialog.component';
 
 
@@ -15,7 +16,7 @@ import { AddEventDialogComponent } from './add-event-dialog/add-event-dialog.com
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, OnDestroy{
   @ViewChild('eventPaginator', { static: true }) eventPaginator: MatPaginator;
   @ViewChild('nav', {read: DragScrollComponent}) ds: DragScrollComponent;
   events$: Observable<any>;
@@ -81,11 +82,28 @@ export class DashboardComponent implements OnInit {
   }
 
   addEvent() {
-    let dialogRef = this.dialog
+    this.subs.sink = this.dialog
       .open(AddEventDialogComponent, { panelClass: 'basic-dialog-container' })
       .afterClosed()
       .subscribe((dialogResult) => {
         this.fetchEvents();
       });
   }
+
+  addAnnouncement() {
+    this.subs.sink = this.dialog
+    .open(AddAnnouncementDialogComponent, {
+      panelClass: 'basic-dialog-container',
+    })
+    .afterClosed()
+    .subscribe((dialogResult) => {
+      this.fetchAnnouncements();
+    })
+  }
+
+  ngOnDestroy() {
+    this.subs.unsubscribe();
+  }
+
+  
 }

@@ -78,8 +78,11 @@ export class ProfileComponent implements OnInit {
         this.resetEditMode();
         this.userProfile = null;
         this.fetchProfile();
+      } else {
+        alert('oops, something went wrong, try again later');
+        this.resetEditMode();
+        this.fetchProfile();
       }
-      
     });
   }
 
