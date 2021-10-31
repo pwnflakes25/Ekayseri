@@ -1,0 +1,22 @@
+.mat-dialog-content {
+    .field-warning-text {
+        font-size: 12px;
+        color: red;
+        margin: 0;
+    }
+
+    .mat-form-field {
+        width: 100%;
+    }
+}
+
+.mat-dialog-actions {
+    .btn {
+        height: fit-content;
+        margin: 10px;
+    }
+
+    .cancel-btn {
+        margin: 10px;
+    }
+}
