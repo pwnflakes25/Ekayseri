@@ -101,6 +101,16 @@ export const JALUR = [
   'Yayasan',
 ];
 
+export const ROLES = [
+  'user',
+  'admin',
+  'alumni',
+  'bendahara',
+  'bph',
+  'ketua_divisi',
+  'beta_tester'
+];
+
 export const INSTITUTIONS = [
   'Abdullah Gül University',
   'Adana Alparslan Türkeş University of Science and Technology',

@@ -3,10 +3,11 @@ import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { AuthService } from 'src/app/shared/services/auth.service';
 import { EventService } from 'src/app/shared/services/event.service';
+import { ProfileService } from 'src/app/shared/services/profile.service';
 import { UtilityService } from 'src/app/shared/services/utility.service';
 import { SubSink } from 'subsink';
-import { AddEventDialogComponent } from '../../dashboard/add-event-dialog/add-event-dialog.component';
 import { AssignRoleDialogComponent } from './assign-role-dialog/assign-role-dialog.component';
 
 @Component({
@@ -15,40 +16,47 @@ import { AssignRoleDialogComponent } from './assign-role-dialog/assign-role-dial
   styleUrls: ['./admin-roles.component.scss'],
 })
 export class AdminRolesComponent implements OnInit {
-  @ViewChild('eventPaginator', { static: true }) eventPaginator: MatPaginator;
-  eventDataCount;
-  eventList = new MatTableDataSource([]);
+  @ViewChild('userPaginator', { static: true }) userPaginator: MatPaginator;
+  usersList = new MatTableDataSource([]);
   eventSearchInput = new FormControl(null);
   subs = new SubSink();
   isLoading = true;
   displayedEventTableColumns = ['name', 'roles', 'actions'];
+  private _token: any;
+  userDataCount: any;
+
   constructor(
     private eventService: EventService,
     private dialog: MatDialog,
-    private utilService: UtilityService
+    private utilService: UtilityService,
+    private authService: AuthService,
+    private profileService: ProfileService
   ) {}
 
   ngOnInit(): void {
-    this.fetchUsers();
+    this.getToken().then(resp => {
+      this.fetchUsers();
+    })
+  }
+
+  async getToken() {
+    this._token = (await this.authService.getSession())
+      .getAccessToken()
+      .getJwtToken();
   }
 
   fetchUsers() {
-    this.subs.sink = this.eventService.getEvents().subscribe((resp: any) => {
-      this.eventList.data = resp.events;
-      this.eventList.paginator = this.eventPaginator;
+    this.isLoading = true;
+    this.subs.sink = this.profileService
+    .getProfiles(this._token)
+    .subscribe((users: any) => {
       this.isLoading = false;
-    });
-  }
-
-  onAddEvent() {
-    let dialogRef = this.dialog
-      .open(AddEventDialogComponent, {
-        panelClass: 'basic-dialog-container',
-      })
-      .afterClosed()
-      .subscribe((dialogResult) => {
-        this.fetchUsers();
+      this.usersList.data = users[0].items.map(user => {
+        return {...user, fullName: `${user.firstName} ${user.lastName}`}
       });
+      this.usersList.paginator = this.userPaginator;
+      this.userDataCount = users.length;
+    });
   }
 
   onEditRoles(element) {
@@ -61,22 +69,5 @@ export class AdminRolesComponent implements OnInit {
       .subscribe((dialogResult) => {
         this.fetchUsers();
       });
-  }
-
-  async onDeleteEvent(element) {
-    console.log('element is:', element);
-    if (confirm('Are you sure you want to delete this event?')) {
-      try {
-        await this.eventService
-          .deleteEvent(element.eventId, element.date)
-          .toPromise();
-        this.fetchUsers();
-      } catch (error) {
-        console.log(error);
-        return;
-      }
-    } else {
-      return;
-    }
   }
 }

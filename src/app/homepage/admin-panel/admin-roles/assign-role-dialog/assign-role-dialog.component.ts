@@ -41,6 +41,7 @@ export class AssignRoleDialogComponent implements OnInit {
 
   initEventForm() {
     this.roleForm = this.fb.group({
+      editedUserId: [this.data.userId],
       roles: [[], Validators.required],
     });
   }
@@ -59,34 +60,19 @@ export class AssignRoleDialogComponent implements OnInit {
 
   async formatPayload() {
     this.isLoading = true;
-    // try {
-    //   const token = (await this.authService.getSession())
-    //     .getAccessToken()
-    //     .getJwtToken();
-    //   const userProfile$ = this.profileService.getProfile(token);
-    //   const userProfile: any = await userProfile$.toPromise();
-    //   this.roleForm.patchValue({
-    //     authorName: `${userProfile[0].firstName} ${userProfile[0].lastName}`,
-    //   });
-    //   if(this.data) {
-    //     const payload = this.eventForm.value;
-    //     console.log(payload);
-    //     payload.eventId = this.data.eventId;
-    //     await this.updateEvent(payload);
-    //   } else {
-    //     this.eventForm.patchValue({ date: this.utilService.dateToISO(this.eventForm.get('date').value)});
-    //     await this.createEvent(this.eventForm.value);
-    //   }
-    //   this.isLoading = false;
-    //   this.dialogRef.close(this.eventForm.value);
-    // } catch (error) {
-    //   this.isLoading = false;
-    //   console.log(error);
-    // }
+    try {
+      const payload = this.roleForm.value;
+      await this.updateRoles(payload);
+      this.isLoading = false;
+      this.dialogRef.close(this.roleForm.value);
+    } catch (error) {
+      this.isLoading = false;
+      console.log(error);
+    }
   }
 
-  updateRole(payload) {
-    // return this.eventService.editEvent(payload).toPromise();
+  updateRoles(payload) {
+    return this.profileService.updateRoles(payload).toPromise();
   }
 
   ngOnDestroy() {

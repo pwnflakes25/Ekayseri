@@ -72,6 +72,21 @@
         vertical-align: middle;
     }
 
+
+    .mat-column-name {
+        width: 25%;
+        max-width: 25%;
+    }
+
+    .mat-column-roles {
+        padding-left: 1em;
+    }
+
+    .mat-column-actions {
+        min-width: 50px;
+        max-width: 50px;
+    }
+
     .actions {
         color: $dark-grey;
         
