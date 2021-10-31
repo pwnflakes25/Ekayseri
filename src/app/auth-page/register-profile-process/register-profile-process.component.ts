@@ -225,7 +225,8 @@ export class RegisterProfileProcessComponent implements OnInit {
     this.profileService.createProfile(payload).subscribe((resp) => {
       if (resp) {
         console.log(resp);
-        this.router.navigate(['/']);
+        alert("Registrasi Berhasil, tunggu sampai akun anda terverifikasi!");
+        this.router.navigate(['/auth']);
       }
     });
   }

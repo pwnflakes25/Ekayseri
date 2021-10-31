@@ -9,12 +9,13 @@ import { AuthGuardService as AuthGuard} from './shared/services/auth-guard.servi
 import { MyDebtComponent } from './homepage/my-debt/my-debt.component';
 import { SpinnerComponent } from './shared/spinner/spinner.component';
 import { EventDetailComponent } from './homepage/event-detail/event-detail.component';
+import { RoleGuardService as RoleGuard} from './shared/services/role-guard.service';
 
 const routes: Routes = [
   {
     path: '',
     component: HomepageComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, RoleGuard],
     children: [
       {
         path: '',
